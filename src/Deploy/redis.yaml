@@ -1,0 +1,11 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: statestore
+spec:
+  type: state.redis
+  metadata:
+  - name: redisHost
+    value: MY_REDIS_HOST:6379
+  - name: redisPassword
+    value: MY_REDIS_PASSWORD

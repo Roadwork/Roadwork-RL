@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="792" height="366" viewBox="0 0 792 366">
+  <defs>
+    <clipPath id="clip-Patent_-_RL_Generic_Simulator_-_Architecture_1">
+      <rect width="792" height="366"/>
+    </clipPath>
+  </defs>
+  <g id="Patent_-_RL_Generic_Simulator_-_Architecture_1" data-name="Patent - RL Generic Simulator - Architecture – 1" clip-path="url(#clip-Patent_-_RL_Generic_Simulator_-_Architecture_1)">
+    <rect width="792" height="366" fill="#fff"/>
+    <g id="Group_79" data-name="Group 79" transform="translate(10 284.706)">
+      <g id="Rectangle_335" data-name="Rectangle 335" transform="translate(0 0.294)" fill="#eee" stroke="#555b63" stroke-width="1">
+        <rect width="768" height="60" rx="3" stroke="none"/>
+        <rect x="0.5" y="0.5" width="767" height="59" rx="2.5" fill="none"/>
+      </g>
+      <text id="DAPR" transform="translate(0 8.294)" fill="#212934" font-size="14" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="365.153" y="15">DAPR</tspan></text>
+      <text id="State_Store" data-name="State Store" transform="translate(0 32.294)" fill="#212934" font-size="12" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="353.206" y="13">State Store</tspan></text>
+    </g>
+    <g id="Group_238" data-name="Group 238" transform="translate(-9 -294)">
+      <g id="Rectangle_384" data-name="Rectangle 384" transform="translate(19 310)" fill="#fff" stroke="#707070" stroke-width="1">
+        <rect width="364" height="229" stroke="none"/>
+        <rect x="0.5" y="0.5" width="363" height="228" fill="none"/>
+      </g>
+      <g id="Component_47_5" data-name="Component 47 – 5" transform="translate(29 349)">
+        <g id="Component_41_12" data-name="Component 41 – 12">
+          <g id="Rectangle_371" data-name="Rectangle 371" fill="#fff" stroke="#707070" stroke-width="1">
+            <rect width="162" height="180" stroke="none"/>
+            <rect x="0.5" y="0.5" width="161" height="179" fill="none"/>
+          </g>
+          <text id="Actor_-_Simulator_Env" data-name="Actor - Simulator Env" transform="translate(81 20)" fill="#212934" font-size="14" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="-70.499" y="0">Actor - Simulator Env</tspan></text>
+        </g>
+        <g id="Group_71" data-name="Group 71" transform="translate(11.294 33.882)">
+          <g id="Rectangle_335-2" data-name="Rectangle 335" transform="translate(-0.294 0.118)" fill="rgba(0,179,255,0.22)" stroke="#555b63" stroke-width="1">
+            <rect width="141" height="47" rx="3" stroke="none"/>
+            <rect x="0.5" y="0.5" width="140" height="46" rx="2.5" fill="none"/>
+          </g>
+          <text id="Minecraft" transform="translate(-0.294 14.118)" fill="#212934" font-size="14" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="38.337" y="15">Minecraft</tspan></text>
+        </g>
+        <g id="Component_40_9" data-name="Component 40 – 9" transform="translate(11 100.471)">
+          <g id="Rectangle_335-3" data-name="Rectangle 335" fill="#eee" stroke="#555b63" stroke-width="1">
+            <rect width="141" height="66" rx="3" stroke="none"/>
+            <rect x="0.5" y="0.5" width="140" height="65" rx="2.5" fill="none"/>
+          </g>
+          <text id="SDK_Actor_State_Sync_Actor_Method_Invoke" data-name="SDK
+Actor State Sync
+Actor Method Invoke" transform="translate(0 8)" fill="#212934" font-size="12" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="58.819" y="13">SDK</tspan><tspan font-size="10" font-family="SegoeUI, Segoe UI" font-weight="400"><tspan x="34.753" y="29">Actor State Sync</tspan><tspan x="23.776" y="45">Actor Method Invoke</tspan></tspan></text>
+        </g>
+        <g id="Group_81" data-name="Group 81" transform="translate(112.941 80)">
+          <line id="Line_65" data-name="Line 65" y1="20.323" transform="translate(4.941 0)" fill="none" stroke="#555b63" stroke-width="1"/>
+          <path id="Polygon_5" data-name="Polygon 5" d="M5,0l5,8H0Z" transform="translate(10.059 20.471) rotate(180)" fill="#555b63"/>
+        </g>
+        <g id="Group_80" data-name="Group 80" transform="translate(45.176 80.706)">
+          <line id="Line_68" data-name="Line 68" y1="20.323" transform="translate(4.941 0.706)" fill="none" stroke="#555b63" stroke-width="1"/>
+          <path id="Polygon_6" data-name="Polygon 6" d="M5,0l5,9H0Z" transform="translate(-0.176 -0.235)" fill="#555b63"/>
+        </g>
+      </g>
+      <g id="Component_47_6" data-name="Component 47 – 6" transform="translate(211 349)">
+        <g id="Component_41_12-2" data-name="Component 41 – 12">
+          <g id="Rectangle_371-2" data-name="Rectangle 371" fill="#fff" stroke="#707070" stroke-width="1">
+            <rect width="162" height="180" stroke="none"/>
+            <rect x="0.5" y="0.5" width="161" height="179" fill="none"/>
+          </g>
+          <text id="Actor_-_Agent" data-name="Actor - Agent" transform="translate(81 20)" fill="#212934" font-size="14" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="-44.738" y="0">Actor - Agent</tspan></text>
+        </g>
+        <g id="Group_71-2" data-name="Group 71" transform="translate(11 34.316)">
+          <g id="Rectangle_335-4" data-name="Rectangle 335" transform="translate(0 -0.316)" fill="#eee" stroke="#555b63" stroke-width="1">
+            <rect width="141" height="132" rx="3" stroke="none"/>
+            <rect x="0.5" y="0.5" width="140" height="131" rx="2.5" fill="none"/>
+          </g>
+          <text id="RL_Algorithm_C_" data-name="RL Algorithm (C#)" transform="translate(0 55.684)" fill="#212934" font-size="14" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="11.13" y="15">RL Algorithm (C#)</tspan></text>
+        </g>
+      </g>
+      <text id="Multi-coupled_Actor_Model" data-name="Multi-coupled Actor Model" transform="translate(29 335)" fill="#212934" font-size="14" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="0" y="0">Multi-coupled Actor Model</tspan></text>
+    </g>
+    <g id="Group_239" data-name="Group 239" transform="translate(395 -294)">
+      <g id="Rectangle_384-2" data-name="Rectangle 384" transform="translate(19 310)" fill="#fff" stroke="#707070" stroke-width="1">
+        <rect width="364" height="229" stroke="none"/>
+        <rect x="0.5" y="0.5" width="363" height="228" fill="none"/>
+      </g>
+      <g id="Component_47_7" data-name="Component 47 – 7" transform="translate(29 349)">
+        <g id="Component_41_12-3" data-name="Component 41 – 12">
+          <g id="Rectangle_371-3" data-name="Rectangle 371" fill="#fff" stroke="#707070" stroke-width="1">
+            <rect width="162" height="180" stroke="none"/>
+            <rect x="0.5" y="0.5" width="161" height="179" fill="none"/>
+          </g>
+          <text id="Actor_-_Simulator_Env-2" data-name="Actor - Simulator Env" transform="translate(81 20)" fill="#212934" font-size="14" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="-70.499" y="0">Actor - Simulator Env</tspan></text>
+        </g>
+        <g id="Group_71-3" data-name="Group 71" transform="translate(11.294 33.882)">
+          <g id="Rectangle_335-5" data-name="Rectangle 335" transform="translate(-0.294 0.118)" fill="rgba(255,0,0,0.22)" stroke="#555b63" stroke-width="1">
+            <rect width="141" height="47" rx="3" stroke="none"/>
+            <rect x="0.5" y="0.5" width="140" height="46" rx="2.5" fill="none"/>
+          </g>
+          <text id="OpenAI_Gym" data-name="OpenAI Gym" transform="translate(-0.294 14.118)" fill="#212934" font-size="14" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="28.671" y="15">OpenAI Gym</tspan></text>
+        </g>
+        <g id="Component_40_9-2" data-name="Component 40 – 9" transform="translate(11 100.471)">
+          <g id="Rectangle_335-6" data-name="Rectangle 335" fill="#eee" stroke="#555b63" stroke-width="1">
+            <rect width="141" height="66" rx="3" stroke="none"/>
+            <rect x="0.5" y="0.5" width="140" height="65" rx="2.5" fill="none"/>
+          </g>
+          <text id="SDK_Actor_State_Sync_Actor_Method_Invoke-2" data-name="SDK
+Actor State Sync
+Actor Method Invoke" transform="translate(0 8)" fill="#212934" font-size="12" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="58.819" y="13">SDK</tspan><tspan font-size="10" font-family="SegoeUI, Segoe UI" font-weight="400"><tspan x="34.753" y="29">Actor State Sync</tspan><tspan x="23.776" y="45">Actor Method Invoke</tspan></tspan></text>
+        </g>
+        <g id="Group_81-2" data-name="Group 81" transform="translate(112.941 80)">
+          <line id="Line_65-2" data-name="Line 65" y1="20.323" transform="translate(4.941 0)" fill="none" stroke="#555b63" stroke-width="1"/>
+          <path id="Polygon_5-2" data-name="Polygon 5" d="M5,0l5,8H0Z" transform="translate(10.059 20.471) rotate(180)" fill="#555b63"/>
+        </g>
+        <g id="Group_80-2" data-name="Group 80" transform="translate(45.176 80.706)">
+          <line id="Line_68-2" data-name="Line 68" y1="20.323" transform="translate(4.941 0.706)" fill="none" stroke="#555b63" stroke-width="1"/>
+          <path id="Polygon_6-2" data-name="Polygon 6" d="M5,0l5,9H0Z" transform="translate(-0.176 -0.235)" fill="#555b63"/>
+        </g>
+      </g>
+      <g id="Component_47_8" data-name="Component 47 – 8" transform="translate(211 349)">
+        <g id="Component_41_12-4" data-name="Component 41 – 12">
+          <g id="Rectangle_371-4" data-name="Rectangle 371" fill="#fff" stroke="#707070" stroke-width="1">
+            <rect width="162" height="180" stroke="none"/>
+            <rect x="0.5" y="0.5" width="161" height="179" fill="none"/>
+          </g>
+          <text id="Actor_-_Multi_Agent" data-name="Actor - Multi Agent" transform="translate(81 20)" fill="#212934" font-size="14" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="-64.306" y="0">Actor - Multi Agent</tspan></text>
+        </g>
+        <g id="Group_71-4" data-name="Group 71" transform="translate(26 40.316)">
+          <g id="Rectangle_335-7" data-name="Rectangle 335" transform="translate(0 -0.316)" fill="#eee" stroke="#555b63" stroke-width="1">
+            <rect width="50" height="50" rx="3" stroke="none"/>
+            <rect x="0.5" y="0.5" width="49" height="49" rx="2.5" fill="none"/>
+          </g>
+          <text id="JS" transform="translate(0 15.184)" fill="#212934" font-size="14" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="17.959" y="15">JS</tspan></text>
+          <g id="Rectangle_385" data-name="Rectangle 385" transform="translate(60 -0.316)" fill="#eee" stroke="#555b63" stroke-width="1">
+            <rect width="50" height="50" rx="3" stroke="none"/>
+            <rect x="0.5" y="0.5" width="49" height="49" rx="2.5" fill="none"/>
+          </g>
+          <text id="C_" data-name="C#" transform="translate(60 15.184)" fill="#212934" font-size="14" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="16.486" y="15">C#</tspan></text>
+          <g id="Rectangle_386" data-name="Rectangle 386" transform="translate(60 59.684)" fill="#eee" stroke="#555b63" stroke-width="1">
+            <rect width="50" height="50" rx="3" stroke="none"/>
+            <rect x="0.5" y="0.5" width="49" height="49" rx="2.5" fill="none"/>
+          </g>
+          <text id="Go" transform="translate(60 75.184)" fill="#212934" font-size="14" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="15.744" y="15">Go</tspan></text>
+          <g id="Rectangle_387" data-name="Rectangle 387" transform="translate(0 59.684)" fill="#eee" stroke="#555b63" stroke-width="1">
+            <rect width="50" height="50" rx="3" stroke="none"/>
+            <rect x="0.5" y="0.5" width="49" height="49" rx="2.5" fill="none"/>
+          </g>
+          <text id="Java" transform="translate(0 75.184)" fill="#212934" font-size="14" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="10.73" y="15">Java</tspan></text>
+        </g>
+      </g>
+      <text id="Multi-coupled_Actor_Model-2" data-name="Multi-coupled Actor Model" transform="translate(29 335)" fill="#212934" font-size="14" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="0" y="0">Multi-coupled Actor Model</tspan></text>
+    </g>
+    <g id="Group_242" data-name="Group 242" transform="translate(679 221)">
+      <path id="Path_1893" data-name="Path 1893" d="M5,0l5,8H0Z" transform="translate(0 0)" fill="#555b63"/>
+      <g id="Group_234" data-name="Group 234" transform="translate(5.042 1.529)">
+        <line id="Line_68-3" data-name="Line 68" y1="58" fill="none" stroke="#555b63" stroke-width="1"/>
+      </g>
+      <path id="Path_1894" data-name="Path 1894" d="M5,8l5-8H0Z" transform="translate(0 56)" fill="#555b63"/>
+    </g>
+    <text id="gRPC" transform="translate(714 264)" fill="#212934" font-size="12" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="-15.062" y="0">gRPC</tspan></text>
+    <g id="Group_243" data-name="Group 243" transform="translate(502 221)">
+      <path id="Path_1893-2" data-name="Path 1893" d="M5,0l5,8H0Z" transform="translate(0 0)" fill="#555b63"/>
+      <g id="Group_234-2" data-name="Group 234" transform="translate(5.042 1.529)">
+        <line id="Line_68-4" data-name="Line 68" y1="58" fill="none" stroke="#555b63" stroke-width="1"/>
+      </g>
+      <path id="Path_1894-2" data-name="Path 1894" d="M5,8l5-8H0Z" transform="translate(0 56)" fill="#555b63"/>
+    </g>
+    <text id="gRPC-2" data-name="gRPC" transform="translate(537 264)" fill="#212934" font-size="12" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="-15.062" y="0">gRPC</tspan></text>
+    <g id="Group_244" data-name="Group 244" transform="translate(279 221)">
+      <path id="Path_1893-3" data-name="Path 1893" d="M5,0l5,8H0Z" transform="translate(0 0)" fill="#555b63"/>
+      <g id="Group_234-3" data-name="Group 234" transform="translate(5.042 1.529)">
+        <line id="Line_68-5" data-name="Line 68" y1="58" fill="none" stroke="#555b63" stroke-width="1"/>
+      </g>
+      <path id="Path_1894-3" data-name="Path 1894" d="M5,8l5-8H0Z" transform="translate(0 56)" fill="#555b63"/>
+    </g>
+    <text id="gRPC-3" data-name="gRPC" transform="translate(314 264)" fill="#212934" font-size="12" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="-15.062" y="0">gRPC</tspan></text>
+    <g id="Group_245" data-name="Group 245" transform="translate(102 221)">
+      <path id="Path_1893-4" data-name="Path 1893" d="M5,0l5,8H0Z" transform="translate(0 0)" fill="#555b63"/>
+      <g id="Group_234-4" data-name="Group 234" transform="translate(5.042 1.529)">
+        <line id="Line_68-6" data-name="Line 68" y1="58" fill="none" stroke="#555b63" stroke-width="1"/>
+      </g>
+      <path id="Path_1894-4" data-name="Path 1894" d="M5,8l5-8H0Z" transform="translate(0 56)" fill="#555b63"/>
+    </g>
+    <text id="gRPC-4" data-name="gRPC" transform="translate(137 264)" fill="#212934" font-size="12" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="-15.062" y="0">gRPC</tspan></text>
+  </g>
+</svg>

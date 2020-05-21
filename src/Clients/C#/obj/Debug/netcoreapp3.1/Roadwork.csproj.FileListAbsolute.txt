@@ -1,0 +1,11 @@
+F:\roadwork.io\src\SDKs\C#\bin\Debug\netcoreapp3.1\Roadwork.exe
+F:\roadwork.io\src\SDKs\C#\bin\Debug\netcoreapp3.1\Roadwork.deps.json
+F:\roadwork.io\src\SDKs\C#\bin\Debug\netcoreapp3.1\Roadwork.runtimeconfig.json
+F:\roadwork.io\src\SDKs\C#\bin\Debug\netcoreapp3.1\Roadwork.runtimeconfig.dev.json
+F:\roadwork.io\src\SDKs\C#\bin\Debug\netcoreapp3.1\Roadwork.dll
+F:\roadwork.io\src\SDKs\C#\bin\Debug\netcoreapp3.1\Roadwork.pdb
+F:\roadwork.io\src\SDKs\C#\obj\Debug\netcoreapp3.1\Roadwork.csprojAssemblyReference.cache
+F:\roadwork.io\src\SDKs\C#\obj\Debug\netcoreapp3.1\Roadwork.AssemblyInfoInputs.cache
+F:\roadwork.io\src\SDKs\C#\obj\Debug\netcoreapp3.1\Roadwork.AssemblyInfo.cs
+F:\roadwork.io\src\SDKs\C#\obj\Debug\netcoreapp3.1\Roadwork.dll
+F:\roadwork.io\src\SDKs\C#\obj\Debug\netcoreapp3.1\Roadwork.pdb
