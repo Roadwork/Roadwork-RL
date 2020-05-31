@@ -9,14 +9,14 @@ logging.basicConfig(level=logging.INFO, format='%(message)s')
 logger = logging.getLogger('MyLogger')
 
 class Client:
-    def __init__(self, host, port, serverId, simId):
+    def __init__(self, host, port, serverId):
         self.host = host
         self.port = port
         self.serverId = serverId
-        self.simId = simId
         self.url = f"http://{host}:{port}/v1.0/invoke/{serverId}"
     
-    def Init(self):
+    def Init(self, simId):
+        self.simId = simId
         self.Create()
 
     def Create(self):
@@ -26,36 +26,37 @@ class Client:
         self.instanceId = res["instanceId"]
 
     def Reset(self):
-        res = requests.post(f"{self.url}/method/reset/{self.instanceId}")
+        res = requests.post(f"{self.url}/method/{self.instanceId}/reset")
+        res = res.json()
         return res
 
     def ActionSpaceSample(self):
-        res = requests.post(f"{self.url}/method/action-space-sample/{self.instanceId}")
+        res = requests.post(f"{self.url}/method/{self.instanceId}/action-space-sample")
         res = res.json()
-        return res["action"]
+        return res
 
     def ActionSpaceInfo(self):
-        res = requests.post(f"{self.url}/method/action-space-info/{self.instanceId}")
+        res = requests.post(f"{self.url}/method/{self.instanceId}/action-space-info")
         res = res.json()
         return res
 
     def ObservationSpaceInfo(self):
-        res = requests.post(f"{self.url}/method/observation-space-info/{self.instanceId}")
+        res = requests.post(f"{self.url}/method/{self.instanceId}/observation-space-info")
         res = res.json()
         return res
 
     def Step(self, action):
         msg = { "action": action }
-        res = requests.post(f"{self.url}/method/step/{self.instanceId}", json=msg)
+        res = requests.post(f"{self.url}/method/{self.instanceId}/step", json=msg)
         res = res.json()
         return res
 
     def MonitorStart(self):
-        res = requests.post(f"{self.url}/method/monitor-start/{self.instanceId}")
+        res = requests.post(f"{self.url}/method/{self.instanceId}/monitor-start")
         return res
 
     def MonitorStop(self):
-        res = requests.post(f"{self.url}/method/monitor-stop/{self.instanceId}")
+        res = requests.post(f"{self.url}/method/{self.instanceId}/monitor-stop")
         return res
 
     # def DebugSlow(self):

@@ -2,15 +2,17 @@ import os
 import grpc
 import sys
 
+# Dapr Imports
+from dapr.proto.common.v1 import common_pb2 as commonv1pb
+from dapr.proto.dapr.v1 import dapr_pb2 as dapr_messages
+from dapr.proto.dapr.v1 import dapr_pb2_grpc as dapr_services
+
+# Roadwork
 import proto_compiled.roadwork_pb2 as roadwork_messages
 import proto_compiled.roadwork_pb2_grpc as roadwork_services
-import proto_compiled.dapr_pb2 as dapr_messages
-import proto_compiled.dapr_pb2_grpc as dapr_services
 
 from google.protobuf.any_pb2 import Any
-
 import protobuf_helpers
-
 from datetime import datetime
 
 class Client:
@@ -19,11 +21,18 @@ class Client:
         self.envId = envId
 
     def DaprInvoke(self, method, req, res_type):
-        envelope = dapr_messages.InvokeServiceEnvelope(id=self.simId, method=method, data=protobuf_helpers.to_any_pb(req))
+        envelope = dapr_messages.InvokeServiceRequest(
+            id=self.simId, 
+            message=commonv1pb.InvokeRequest(
+                method=method,
+                data=protobuf_helpers.to_any_pb(req),
+                content_type="text/plain; charset=UTF-8"
+            )
+        )
         res = self.client.InvokeService(envelope)
         res = protobuf_helpers.from_any_pb(res_type, res.data)
         return res
-    
+
     def Init(self, host, port):
         self.host = host
         self.port = port

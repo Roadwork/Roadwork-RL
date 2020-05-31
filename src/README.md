@@ -15,6 +15,21 @@ sudo ./Scripts/build.sh Servers/OpenAI roadwork/rw-server-openai
 
 ./Scripts/get-output-server.sh rw-server-openai /mnt/f/test/output-server
 
+## Running Dapr Manually
+
+dapr run --app-id id-rw-server-openai --protocol grpc --app-port 50050 python .\server.py
+dapr run --app-id demo-client --protocol grpc python main.py
+
+## Build 
+
+**Server**
+./Scripts/windows/build.ps1 ./Servers/OpenAI/ rw-server-openai
+./Scripts/windows/start-server.ps1 ./Servers/OpenAI/ rw-server-openai
+
+**Client**
+./Scripts/windows/build.ps1 ./Clients/python/experiments/cartpole/ rw-client-python-cartpole
+./Scripts/windows/start-client.ps1 ./Clients/python/experiments/cartpole/ rw-client-python-cartpole
+
 ## Compiling Protobuf
 
 ```bash

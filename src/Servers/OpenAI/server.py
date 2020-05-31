@@ -6,10 +6,15 @@ from concurrent import futures
 from datetime import datetime
 
 import grpc
-import proto_compiled.dapr_pb2 as dapr_messages
-import proto_compiled.dapr_pb2_grpc as dapr_services
-import proto_compiled.daprclient_pb2 as daprclient_messages
-import proto_compiled.daprclient_pb2_grpc as daprclient_services
+
+# Dapr Libraries
+from dapr.proto.common.v1 import common_pb2 as commonv1pb
+from dapr.proto.dapr.v1 import dapr_pb2 as dapr_messages
+from dapr.proto.dapr.v1 import dapr_pb2_grpc as dapr_services
+from dapr.proto.daprclient.v1 import daprclient_pb2 as daprclient_messages
+from dapr.proto.daprclient.v1 import daprclient_pb2_grpc as daprclient_services
+
+# Custom Protobuf
 import proto_compiled.roadwork_pb2 as roadwork_messages
 
 import protobuf_helpers
@@ -38,22 +43,8 @@ print(f"Started gRPC client on DAPR_GRPC_PORT: {DAPR_PORT_GRPC}")
 
 # Our server methods
 class DaprClientServicer(daprclient_services.DaprClientServicer):
-    def GetTopicSubscriptions(self, request, context):
-        res = daprclient_messages.GetTopicSubscriptionsEnvelope()
-        return res
-
-    def GetBindingsSubscriptions(self, request, context):
-        res = daprclient_messages.GetBindingsSubscriptionsEnvelope()
-        return res
-
-    def OnBindingEvent(self, request, context):
-        res = daprclient_messages.BindingResponseEnvelope()
-        return res
-
     def OnInvoke(self, request, context):
         res = ""
-
-        # print(f"[OnInvoke][{request.method}] Start @ {datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')}")
 
         if request.method == 'create':
             req = protobuf_helpers.from_any_pb(roadwork_messages.CreateRequest, request.data)
@@ -99,7 +90,7 @@ class DaprClientServicer(daprclient_services.DaprClientServicer):
             res = protobuf_helpers.to_any_pb(res)
         elif request.method == 'monitor-start':
             req = protobuf_helpers.from_any_pb(roadwork_messages.BaseRequest, request.data)
-            envs.monitor_start(req.instanceId, '/app/output-server', True, False, 10) # Log to local dir so we can reach it
+            envs.monitor_start(req.instanceId, '/mnt/output-server', True, False, 10) # Log to local dir so we can reach it
             res = roadwork_messages.BaseResponse()
             res = protobuf_helpers.to_any_pb(res)
         elif request.method == 'monitor-stop':
@@ -112,7 +103,9 @@ class DaprClientServicer(daprclient_services.DaprClientServicer):
 
         # print(f"[OnInvoke][{request.method}] Done @ {datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')}")
 
-        return res
+        # Return response to caller
+        content_type = "text/plain; charset=UTF-8"
+        return commonv1pb.InvokeResponse(data=res, content_type=content_type)
 
 # Create a gRPC server
 server = grpc.server(futures.ThreadPoolExecutor(max_workers = 10))

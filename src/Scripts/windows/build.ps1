@@ -1,0 +1,10 @@
+$EXECUTION_PATH=(Get-Location).Path
+
+$CONTAINER_PATH=$args[0]
+$CONTAINER_IMAGE=$args[1]
+
+$DOCKER_REGISTERY="roadwork.io"
+$DOCKER_IMAGE="${CONTAINER_IMAGE}:latest"
+
+docker build -t $DOCKER_REGISTERY/$DOCKER_IMAGE $CONTAINER_PATH
+# docker push $Env:REGISTERY/$Env:DOCKER_IMAGE

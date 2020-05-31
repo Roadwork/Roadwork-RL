@@ -29,79 +29,64 @@ envs = Envs()
 app = flask.Flask(__name__)
 CORS(app)
 
+# /step/<instanceId> will give def met(instanceId)
 @app.route('/create', methods=['POST'])
 def create():
-    [envId] = request.json
+    envId = request.json["envId"]
+    instanceId = envs.create(envId)
 
-    res = dict()
-    res['instanceId'] = envs.create(envId)
+    res = {
+        "instanceId": instanceId
+    }
 
-    logger.info('Received something')
+    print(f"Created instance {instanceId} for sim environment {envId}")
+    
+    return jsonify(res)
+
+@app.route('/<instanceId>/reset', methods=['POST'])
+def reset(instanceId):
+    res = envs.reset(instanceId)
+    return jsonify(res)
+
+@app.route('/<instanceId>/action-space-sample', methods=['POST'])
+def actionSpaceSample(instanceId):
+    res = envs.get_action_space_sample(instanceId)
+    return jsonify(res)
+
+@app.route('/<instanceId>/action-space-info', methods=['POST'])
+def actionSpaceInfo(instanceId):
+    res = envs.get_action_space_info(instanceId)
+    return jsonify(res)
+
+@app.route('/<instanceId>/observation-space-info', methods=['POST'])
+def observationSpaceInfo(instanceId):
+    res = envs.get_observation_space_info(instanceId)
+    return jsonify(res)
+
+@app.route('/<instanceId>/step', methods=['POST'])
+def step(instanceId):
+    action = request.json["action"]
+
+    step = envs.step(instanceId, action, True)
+
+    res = {
+        "obs": step[0],
+        "reward": step[1],
+        "isDone": step[2],
+        "info": step[3]
+    }
 
     return jsonify(res)
 
-@app.route('/reset', methods=['POST'])
-def reset():
-    [instanceId] = request.json
-
-    res = dict()
-    res['observation'] = envs.reset(instanceId)
-
+@app.route('/<instanceId>/monitor-start', methods=['POST'])
+def monitorStart(instanceId):
+    res = envs.monitor_start(instanceId, '/mnt/roadwork', True, False, 10)
     return jsonify(res)
 
-@app.route('/action-space-sample', methods=['POST'])
-def actionSpaceSample():
-    [instanceId] = request.json
-
-    res = dict()
-    res['action'] = envs.get_action_space_sample(instanceId)
-
-    return jsonify(res)
-
-@app.route('/action-space-info', methods=['POST'])
-def actionSpaceInfo():
-    [instanceId] = request.json
-
-    res = dict()
-    res['observation'] = envs.get_action_space_info(instanceId)
-
-    return jsonify(res)
-
-@app.route('/observation-space-info', methods=['POST'])
-def observationSpaceInfo():
-    [instanceId] = request.json
-
-    res = dict()
-    res['result'] = envs.reset(instanceId)
-
-    return jsonify(res)
-
-@app.route('/step', methods=['POST'])
-def step():
-    [instanceId, action, render] = request.json
-
-    res = dict()
-    res['result'] = envs.step(instanceId, action, render)
-
-    return jsonify(res)
-
-@app.route('/monitor-start', methods=['POST'])
-def monitorStart():
-    [instanceId] = request.json
-
-    res = dict()
-    res['result'] = envs.monitor_start(instanceId, './monitor', True, False, 10)
-
-    return jsonify(res)
-
-@app.route('/monitor-stop', methods=['POST'])
-def monitorStop():
-    [instanceId] = request.json
-
+@app.route('/<instanceId>/monitor-stop', methods=['POST'])
+def monitorStop(instanceId):
     envs.monitor_close(instanceId)
-    res = dict()
-
-    return jsonify(res)
+    return jsonify({})
 
 if __name__ == '__main__':
     logger.info(f'Running on port {APP_HTTP_PORT}')

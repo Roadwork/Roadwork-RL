@@ -7,8 +7,6 @@ import argparse
 import sys
 import json
 
-# import Serializer
-
 import logging
 logger = logging.getLogger('werkzeug')
 logger.setLevel(logging.ERROR)
@@ -96,8 +94,7 @@ class Envs(object):
 
     def get_action_space_info(self, instance_id):
         env = self._lookup_env(instance_id)
-        return env.action_space
-        # return self._get_space_properties(env.action_space)
+        return self._get_space_properties(env.action_space)
 
     def get_action_space_sample(self, instance_id):
         env = self._lookup_env(instance_id)
@@ -112,7 +109,7 @@ class Envs(object):
 
     def get_observation_space_contains(self, instance_id, j):
         env = self._lookup_env(instance_id)
-        # info = self._get_space_properties(env.observation_space)
+        info = self._get_space_properties(env.observation_space)
         info = env.observation_space
         for key, value in j.items():
             # Convert both values to json for comparibility
@@ -123,12 +120,28 @@ class Envs(object):
 
     def get_observation_space_info(self, instance_id):
         env = self._lookup_env(instance_id)
-        return env.observation_space
-        # return self._get_space_properties(env.observation_space)
+        return self._get_space_properties(env.observation_space)
 
-    # # A space is an object that can consist out of sub objects
-    # def _get_space_properties(self, space):
-    #     return Serializer.serialize(space)
+    # A space is an object that can consist out of sub objects
+    def _get_space_properties(self, space):
+        info = {}
+        info['name'] = space.__class__.__name__
+
+        if info['name'] == 'Discrete':
+            info['n'] = space.n
+        elif info['name'] == 'Box':
+            info['shape'] = space.shape
+            # It's not JSON compliant to have Infinity, -Infinity, NaN.
+            # Many newer JSON parsers allow it, but many don't. Notably python json
+            # module can read and write such floats. So we only here fix "export version",
+            # also make it flat.
+            info['low']  = [(float(x) if x != -np.inf else -1e100) for x in np.array(space.low ).flatten()]
+            info['high'] = [(float(x) if x != +np.inf else +1e100) for x in np.array(space.high).flatten()]
+        elif info['name'] == 'HighLow':
+            info['num_rows'] = space.num_rows
+            info['matrix'] = [((float(x) if x != -np.inf else -1e100) if x != +np.inf else +1e100) for x in np.array(space.matrix).flatten()]
+
+        return info
 
     def monitor_start(self, instance_id, directory, force, resume, video_callable):
         env = self._lookup_env(instance_id)

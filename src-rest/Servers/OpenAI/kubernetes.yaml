@@ -1,0 +1,75 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-wsl2
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /run/desktop/mnt/host/c/roadwork/rw-server-openai # The path is created in ./start-server.ps1
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - docker-desktop
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-roadwork
+spec:
+  storageClassName: local-storage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment # Create Dapr Deployment, will automatically have 2 pods (described below + daprd)
+metadata:
+  name: rw-server-openai
+  labels: # Labels for the DEPLOYMENT, this way we can filter e.g. `kubectl delete -l key=value,key2=value2`
+    app: rw-server-openai # deployment-roadwork-...
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rw-server-openai # Which pod will the deployment apply to?
+  template:
+    metadata:
+      labels: # Labels for the POD
+        app: rw-server-openai # pod-roadwork-...
+      annotations:
+        dapr.io/enabled: "true" # Do we inject a sidecar to this deployment?
+        dapr.io/id: "id-rw-server-openai" # Unique ID or Name for Dapr App (so we can communicate with it)
+        # dapr.io/protocol: "grpc"
+        dapr.io/port: "9000" # Port we are going to listen on (is app specific)
+    spec:
+      containers:
+      - name: server # Name of our container, e.g. `kubectl logs -c c-rw-...`
+        image: roadwork.io/rw-server-openai:latest
+        imagePullPolicy: Never # in production PullIfNotPresent or Always
+        env:
+        - name: PYTHONUNBUFFERED
+          value: "1"
+        # - name: GRPC_VERBOSITY
+        #   value: "DEBUG"
+        # - name: GRPC_TRACE
+        #   value: "api,channel,call_error,connectivity_state,http,server_channel"
+        volumeMounts:
+        - name: volume-server-output
+          mountPath: /mnt/roadwork
+      volumes:
+      - name: volume-server-output
+        persistentVolumeClaim:
+          claimName: pvc-roadwork

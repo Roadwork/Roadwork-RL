@@ -1,0 +1,30 @@
+# A job will run and automatically create & delete a pod
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rw-client-python-cartpole
+spec:
+  ttlSecondsAfterFinished: 120 # How long do we keep the pod after finishing?
+  backoffLimit: 1 # Restart once on failure
+  template:
+    metadata:
+      labels: # Labels for the POD
+        app: rw-client-python-cartpole # This way we can filter with kubectl get pods -l app=...
+      name: rw-client-python-cartpole # pod-roadwork-...
+      annotations:
+        dapr.io/enabled: "true" # Do we inject a sidecar to this deployment?
+        dapr.io/id: "id-rw-client-python-cartpole" # Unique ID or Name for Dapr App (so we can communicate with it)
+        dapr.io/protocol: "grpc"
+    spec:
+      restartPolicy: OnFailure # OnFailure since sometimes we fail to identify the GRPC Channel
+      containers:
+      - name: client # Name of our container, e.g. `kubectl logs -c c-rw-...`
+        image: roadwork.io/rw-client-python-cartpole:latest
+        imagePullPolicy: IfNotPresent # Production: Always or NotIfPresent
+        env:
+        - name: PYTHONUNBUFFERED
+          value: "1"
+        # - name: GRPC_VERBOSITY
+        #   value: "DEBUG"
+        # - name: GRPC_TRACE
+        #   value: "api,channel,call_error,connectivity_state,http,server_channel"
