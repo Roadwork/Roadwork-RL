@@ -202,3 +202,6 @@ public/
 
 # DynamoDB Local files
 .dynamodb/
+
+# Custom
+output-server/

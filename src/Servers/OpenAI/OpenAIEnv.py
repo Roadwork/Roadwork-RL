@@ -13,6 +13,8 @@ import logging
 logger = logging.getLogger('werkzeug')
 logger.setLevel(logging.ERROR)
 
+import traceback
+
 ########## Error handling ##########
 class InvalidUsage(Exception):
     status_code = 400
@@ -74,21 +76,32 @@ class Envs(object):
         return dict([(instance_id, env.spec.id) for (instance_id, env) in self.envs.items()])
 
     def reset(self, instance_id):
-        env = self._lookup_env(instance_id)
-        obs = env.reset()
-        return env.observation_space.to_jsonable(obs)
+        try:
+            env = self._lookup_env(instance_id)
+            obs = env.reset()
+            return env.observation_space.to_jsonable(obs)
+        except:
+            print(sys.exc_info())
+            traceback.print_tb(sys.exc_info()[2])
+            raise
 
     def step(self, instance_id, action, render):
-        env = self._lookup_env(instance_id)
-        if isinstance( action, six.integer_types ):
-            nice_action = action
-        else:
-            nice_action = np.array(action)
-        if render:
-            env.render()
-        [observation, reward, done, info] = env.step(nice_action)
-        obs_jsonable = env.observation_space.to_jsonable(observation)
-        return [obs_jsonable, reward, done, info]
+        try:
+            env = self._lookup_env(instance_id)
+            if isinstance(action, six.integer_types):
+                nice_action = action
+            else:
+                nice_action = np.array(action)
+            if render:
+                env.render()
+            
+            [observation, reward, done, info] = env.step(nice_action)
+            obs_jsonable = env.observation_space.to_jsonable(observation)
+            return [obs_jsonable, reward, done, info]
+        except:
+            print(sys.exc_info())
+            traceback.print_tb(sys.exc_info()[2])
+            raise
 
     def get_action_space_contains(self, instance_id, x):
         env = self._lookup_env(instance_id)

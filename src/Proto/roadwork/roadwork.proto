@@ -122,7 +122,6 @@ message CreateResponse {
     string instanceId = 1;
 }
 
-
 message ActionSpaceSampleResponse {
     int32 action = 1; // Note: Serialized as bytes!
 }

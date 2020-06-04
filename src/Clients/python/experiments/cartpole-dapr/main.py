@@ -8,10 +8,11 @@ import os
 from Client import Client
 import time
 
-SERVER_GRPC_PORT = os.getenv("SERVER_GRPC_PORT", 50050)
+DAPR_HTTP_PORT = os.getenv("DAPR_HTTP_PORT", 3500)
+DAPR_GRPC_PORT = os.getenv("DAPR_GRPC_PORT", 50001)
 
 print(f"==================================================")
-print(f"SERVER_GRPC_PORT: {SERVER_GRPC_PORT}")
+print(f"DAPR_PORT_GRPC: {DAPR_GRPC_PORT}; DAPR_PORT_HTTP: {DAPR_HTTP_PORT}")
 print(f"==================================================")
 
 class QCartPoleSolver():
@@ -26,7 +27,7 @@ class QCartPoleSolver():
         self.quiet = quiet
 
         self.env = Client('id-rw-server-openai', 'CartPole-v0')
-        self.env.Init("localhost", SERVER_GRPC_PORT)
+        self.env.Init("localhost", DAPR_GRPC_PORT)
 
         if max_env_steps is not None: self.env._max_episode_steps = max_env_steps
         actionSpaceInfo = self.env.ActionSpaceInfo()
@@ -74,6 +75,7 @@ class QCartPoleSolver():
             while not done:
                 # self.env.Render()
                 action = self.choose_action(current_state, epsilon)
+
                 stepResponse = self.env.Step(action)
 
                 obs = stepResponse.observation
