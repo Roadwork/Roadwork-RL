@@ -8,8 +8,11 @@ export ROADWORK_OUTPUT_DIR=$OUTPUT_DIR
 
 # Install Dependencies
 echo "Installing Dependencies"
-pip install -r $SERVER_PATH/requirements.txt
+pip install -r $SERVER_PATH/requirements.txt > /dev/null
 
 # Run Server
 echo "Running Server: $SERVER_NAME"
+echo "- Output Directory: $ROADWORK_OUTPUT_DIR"
 xvfb-run -s "-screen 0 1400x900x24" python3 "$SERVER_PATH/server.py"
+
+# xvfb-run -e /tmp/xvfb.err -a -s "-screen 0 1400x900x24 +extension RANDR" -- glxinfo

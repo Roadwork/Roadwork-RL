@@ -9,12 +9,14 @@ The following script can be utilized to install all the packages on an Ubuntu Di
 ```bash
 # 1. Installing Dependencies
 sudo apt install ffmpeg xvfb python-opengl 
+sudo apt install swig # Required for OpenAI Box2D Environment
+sudo apt install xorg-dev libglu1-mesa libgl1-mesa-dev xvfb libxinerama1 libxcursor1 # Virtual Screens
+sudo apt install nvidia-384 nvidia-modprobe # Add NVIDIA Support
 
 # 2. Installing Anaconda
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh
 bash /tmp/miniconda.sh -b -p $HOME/miniconda
 ```
-
 
 ### Installing Libraries
 
@@ -24,10 +26,10 @@ bash /tmp/miniconda.sh -b -p $HOME/miniconda
 
 ```bash
 # Start Server
-./Scripts/run-server.sh openai /mnt/e/Projects/roadwork-rl/output-server
+./Scripts/linux/run-server.sh openai $(pwd)/../output-server/cartpole
 
 # Start Experiment
-./Scripts/run-experiment.sh python cartpole
+./Scripts/linux/run-experiment.sh python cartpole-rllib
 ```
 
 ### Lunar Lander

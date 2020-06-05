@@ -65,7 +65,7 @@ message BaseRequest {
 
 message StepRequest {
     string instanceId = 1; // The instanceId of the environment
-    int32 action = 2; // The action provided by the agent (@todo: the datatype doesn't exist...)
+    repeated double action = 2; // The action provided by the agent (@todo: the datatype doesn't exist...)
     bool render = 3; // Do we need to render? (@todo)
 }
 
@@ -140,12 +140,13 @@ message ObservationSpaceInfoResponse {
 // This file contains the different definitions of the spaces that 
 // can utilize to serialize. Examples are: Discrete Spaces, Box Spaces, ...
 message MetaSpaceBox {
-    repeated uint32 dimensions = 1; // How many dimensions do we have?
+    repeated uint32 shape = 1; // Shape in tuple format, e.g. 2, 3, 4 => is 24 dimensions
+    repeated MetaSpaceBoxDimension dimensions = 2; // The dimensions
+}
 
-    oneof dimension {
-        // @todo: currently double to span multiple, can be expanded to others for more compactness
-        MetaSpaceBoxDimensionDouble dimensionDouble = 2;
-    }
+message MetaSpaceBoxDimension {
+    double low = 1;
+    double high = 2;
 }
 
 message MetaSpaceBoxDimensionDouble {

@@ -6,6 +6,10 @@ pip install git+git://github.com/openai/gym.git
 
 ## Specific Errors
 
+**pyglet requires an X server with GLX:**
+
+* Check if GLX is supported: `xvfb-run -e /tmp/xvfb.err -a -s "-screen 0 1400x900x24 +extension RANDR" -- glxinfo`
+
 **Failed to serialize response:**
 
 * Is a response being returned correctly?

@@ -2,7 +2,6 @@ import gym.spaces
 import proto_compiled.roadwork_pb2 as roadwork_messages
 import numpy as np
 
-
 def serialize(obj):
     className = obj.__class__.__name__
 

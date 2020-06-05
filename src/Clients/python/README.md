@@ -1,7 +1,13 @@
 # Python SDK
 
-## Generating Protobuf
+## Running Experiments
 
-```bash
-python3 -m grpc_tools.protoc --proto_path=../../protobuf-definitions/ --python_out=. --grpc_python_out=. ../../protobuf-definitions/services/simulator.proto
-```
+### CartPole
+
+./Scripts/linux/experiment-train.sh python cartpole
+./Scripts/linux/experiment-infer.sh python cartpole
+
+### LunarLander
+
+./Scripts/linux/experiment-train.sh python lunar-lander
+./Scripts/linux/experiment-infer.sh python lunar-lander

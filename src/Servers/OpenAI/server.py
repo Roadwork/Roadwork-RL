@@ -93,7 +93,8 @@ class RoadworkServicer(roadwork_grpc.RoadworkServicer):
         return res
 
     def ObservationSpaceInfo(self, request, context): # ObservationSpaceInfoResponse
-        res = roadwork_messages.ObservationSpaceInfoResponse(result=envs.get_observation_space_info(request.instanceId))
+        info = envs.get_observation_space_info(request.instanceId)
+        res = roadwork_messages.ObservationSpaceInfoResponse(result=info)
         return res
 
     def MonitorStart(self, request, context): # BaseResponse

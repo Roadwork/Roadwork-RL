@@ -6,8 +6,8 @@ EXPERIMENT_PATH="$CURRENT_DIR/Clients/$LANGUAGE_NAME/experiments/$EXPERIMENT_NAM
 
 # Install Dependencies
 echo "Installing Dependencies"
-pip install -r $EXPERIMENT_PATH/requirements.txt
+pip install -r $EXPERIMENT_PATH/requirements.txt > /dev/null
 
 # Run Experiment
-echo "Running Experiment: $EXPERIMENT_PATH/main.py"
-python3 "$EXPERIMENT_PATH/main.py"
+echo "Running Experiment: $EXPERIMENT_PATH/train.py"
+python3 "$EXPERIMENT_PATH/train.py"

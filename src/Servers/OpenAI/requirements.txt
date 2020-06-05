@@ -2,4 +2,7 @@ grpcio==1.29.0
 grpcio-tools==1.29.0
 gym==0.17.2
 protobuf==3.12.2
-dapr-client==0.4.0b1
+
+# OpenAI Requirements
+Box2D==2.3.10
+Box2D-kengz==2.3.3

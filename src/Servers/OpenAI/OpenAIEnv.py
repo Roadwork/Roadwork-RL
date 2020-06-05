@@ -63,10 +63,16 @@ class Envs(object):
             env = gym.make(env_id)
             if seed:
                 env.seed(seed)
-        except gym.error.Error:
+        except gym.error.Error as e:
+            print(e)
             raise InvalidUsage("Attempted to look up malformed environment ID '{}'".format(env_id))
         except Exception as e:
+            print(e)
             raise Exception(e)
+        except:
+            print(sys.exc_info())
+            traceback.print_tb(sys.exc_info()[2])
+            raise
 
         instance_id = str(uuid.uuid4().hex)[:self.id_len]
         self.envs[instance_id] = env
