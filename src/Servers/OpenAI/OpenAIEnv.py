@@ -7,7 +7,7 @@ import argparse
 import sys
 import json
 
-import Serializer
+from roadwork.grpc import Serializer
 
 import logging
 logger = logging.getLogger('werkzeug')
@@ -144,7 +144,7 @@ class Envs(object):
 
     # A space is an object that can consist out of sub objects
     def _get_space_properties(self, space):
-        return Serializer.serialize(space)
+        return Serializer.serializeMeta(space)
 
     def monitor_start(self, instance_id, directory, force, resume, video_callable):
         env = self._lookup_env(instance_id)

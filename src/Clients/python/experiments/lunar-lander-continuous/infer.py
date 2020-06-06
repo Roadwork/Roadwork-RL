@@ -2,17 +2,19 @@ import os
 import gym
 import ray
 from ray.rllib.agents import ppo
+
 from roadwork.client import RayEnvironment as RwRayEnvironment
 
-CHECKPOINT_DIR = "/mnt/e/Projects/roadwork-rl/output-server/cartpole-checkpoint"
-CHECKPOINT_FILE = "checkpoint_162/checkpoint-162"
+SERVER_GRPC_PORT = os.getenv("SERVER_GRPC_PORT", 50050)
+CHECKPOINT_DIR = "/mnt/e/Projects/roadwork-rl/output-server/lunar-lander-continuous-checkpoint"
+CHECKPOINT_FILE = "checkpoint_100/checkpoint-100"
 
 ray.init()
 
 # Create Agent
 config = {
     "rw_sim": "openai",
-    "rw_env": "CartPole-v0",
+    "rw_env": "LunarLanderContinuous-v2",
     "rw_grpc_host": "localhost",
     "rw_grpc_port": 50050
 }

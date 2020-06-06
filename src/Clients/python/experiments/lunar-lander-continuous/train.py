@@ -5,7 +5,7 @@ from ray.rllib.agents import ppo
 
 from roadwork.client import RayEnvironment as RwRayEnvironment
 
-CHECKPOINT_DIR = "/mnt/e/Projects/roadwork-rl/output-server/lunar-lander-checkpoint"
+CHECKPOINT_DIR = "/mnt/e/Projects/roadwork-rl/output-server/lunar-lander-continuous-checkpoint"
 CHECKPOINT_FILE = "last_checkpoint.out"
 
 ray.init()
@@ -13,7 +13,7 @@ ray.init()
 # Configure RLLib with The Roadwork Environment
 trainer = ppo.PPOTrainer(env=RwRayEnvironment, config={ "env_config": {
     "rw_sim": "openai",
-    "rw_env": "LunarLander-v2",
+    "rw_env": "LunarLanderContinuous-v2",
     "rw_grpc_host": "localhost",
     "rw_grpc_port": 50050
 }})

@@ -12,7 +12,7 @@ CHECKPOINT_FILE = "last_checkpoint.out"
 ray.init()
 trainer = ppo.PPOTrainer(env=rw.RayEnvironment, config={ "env_config": {
     "rw_sim": "openai",
-    "rw_env": "BipedalWalkerHardcore-v3",
+    "rw_env": "BipedalWalker-v3",
     "rw_grpc_host": "localhost",
     "rw_grpc_port": 50050
 }})

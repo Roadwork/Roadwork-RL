@@ -7,14 +7,14 @@ import roadwork as rw
 
 SERVER_GRPC_PORT = os.getenv("SERVER_GRPC_PORT", 50050)
 CHECKPOINT_DIR = "/mnt/e/Projects/roadwork-rl/output-server/bipedal-walker-checkpoint"
-CHECKPOINT_FILE = "checkpoint_57/checkpoint-57"
+CHECKPOINT_FILE = "checkpoint_260/checkpoint-260"
 
 ray.init()
 
 # Create Agent
 config = {
     "rw_sim": "openai",
-    "rw_env": "BipedalWalkerHardcore-v2",
+    "rw_env": "BipedalWalker-v3",
     "rw_grpc_host": "localhost",
     "rw_grpc_port": 50050
 }

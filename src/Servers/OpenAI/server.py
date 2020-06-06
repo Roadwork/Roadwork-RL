@@ -8,8 +8,11 @@ from datetime import datetime
 import grpc
 
 # Custom Protobuf
-import proto_compiled.roadwork_pb2 as roadwork_messages # Contains Message Classes
-import proto_compiled.roadwork_pb2_grpc as roadwork_grpc # Contains Server & Client Classes
+# import proto_compiled.roadwork_pb2 as roadwork_messages # Contains Message Classes
+# import proto_compiled.roadwork_pb2_grpc as roadwork_grpc # Contains Server & Client Classes
+
+from roadwork.proto import api_v1, api_service_v1
+from roadwork.grpc import Serializer
 
 import protobuf_helpers
 
@@ -28,6 +31,7 @@ print(f"============================================================")
 
 # import gym
 envs = Envs()
+
 class ProtoUtil:
     @staticmethod
     def json_object_to_proto_map(jsonObject):
@@ -43,39 +47,36 @@ class ProtoUtil:
 
 
 # Our server methods
-class RoadworkServicer(roadwork_grpc.RoadworkServicer):
+class RoadworkServicer(api_service_v1.RoadworkServicer):
     def Create(self, request, context): # CreateRequest
-        res = roadwork_messages.CreateResponse(instanceId=envs.create(request.envId))
+        env = envs.create(request.envId)
+        print(f"[Server][{env}] Created Environment")
+
+        # action_space = envs.get_action_space_info(env)
+        # print(f"[Server][{env}] - Action Space: {action_space}")
+
+        # observation_space = envs.get_observation_space_info(env)
+        # print(f"[Server][{env}] - Observation Space: {observation_space}")
+
+        res = api_v1.CreateResponse(instanceId=env)
         return res
 
     def Step(self, request, context): # StepRequest
         # Returns 0 = obs_jsonable, 1 = reward, 2 = done, 3 = info in object (e.g. {'TimeLimit.truncated': True})
-        res_step = envs.step(request.instanceId, request.action, request.render)
+        observation, reward, isDone, info = envs.step(request.instanceId, request.action, request.render)
 
         # Observation Space
         res_osi = envs.get_observation_space_info(request.instanceId)
-        space_wrapper = roadwork_messages.SpaceWrapper()
-
-        if res_osi.HasField('discrete'):
-            space_discrete = roadwork_messages.SpaceDiscrete()
-            space_discrete.observation = res_step[0]
-            space_wrapper.discrete.CopyFrom(space_discrete)
-        elif res_osi.HasField('box'):
-            space_box = roadwork_messages.SpaceBox()
-            space_box.observation.extend(res_step[0])
-            space_wrapper.box.CopyFrom(space_box)
-        else:
-            logging.error("Unsupported Space Type: %s" % res_step[3]['name'])
-            logging.error(info)
+        space_wrapper = Serializer.serialize(res_osi, observation)
 
         # Encode Info (sometimes it can contain a bool)
-        info = ProtoUtil.json_object_to_proto_map(res_step[3])
-        res = roadwork_messages.StepResponse(reward=res_step[1], isDone=res_step[2], info=info, observation=space_wrapper)
+        info = ProtoUtil.json_object_to_proto_map(info)
+        res = api_v1.StepResponse(reward=reward, isDone=isDone, info=info, observation=space_wrapper)
         
         return res
 
     def Reset(self, request, context): # ResetResponse
-        res = roadwork_messages.ResetResponse(observation=envs.reset(request.instanceId))
+        res = api_v1.ResetResponse(observation=envs.reset(request.instanceId))
         return res
 
     def Render(self, request, context):
@@ -85,33 +86,33 @@ class RoadworkServicer(roadwork_grpc.RoadworkServicer):
         return
 
     def ActionSpaceSample(self, request, context): # ActionSpaceSampleResponse
-        res = roadwork_messages.ActionSpaceSampleResponse(action=envs.get_action_space_sample(request.instanceId))
+        res = api_v1.ActionSpaceSampleResponse(action=envs.get_action_space_sample(request.instanceId))
         return res
 
     def ActionSpaceInfo(self, request, context): # ActionSpaceInfoResponse
-        res = roadwork_messages.ActionSpaceInfoResponse(result=envs.get_action_space_info(request.instanceId))
+        res = api_v1.ActionSpaceInfoResponse(result=envs.get_action_space_info(request.instanceId))
         return res
 
     def ObservationSpaceInfo(self, request, context): # ObservationSpaceInfoResponse
         info = envs.get_observation_space_info(request.instanceId)
-        res = roadwork_messages.ObservationSpaceInfoResponse(result=info)
+        res = api_v1.ObservationSpaceInfoResponse(result=info)
         return res
 
     def MonitorStart(self, request, context): # BaseResponse
         envs.monitor_start(request.instanceId, OUTPUT_DIRECTORY, True, False, 10) # Log to local dir so we can reach it
-        res = roadwork_messages.BaseResponse()
+        res = api_v1.BaseResponse()
         return res
 
     def MonitorStop(self, request, context): # BaseResponse
         envs.monitor_close(request.instanceId)
-        res = roadwork_messages.BaseResponse()
+        res = api_v1.BaseResponse()
         return res
 
     # print(f"[OnInvoke][{request.method}] Done @ {datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')}")
 
 # Create a gRPC server
 server = grpc.server(futures.ThreadPoolExecutor(max_workers = 10))
-roadwork_grpc.add_RoadworkServicer_to_server(RoadworkServicer(), server)
+api_service_v1.add_RoadworkServicer_to_server(RoadworkServicer(), server)
 
 # Start the gRPC server
 print(f'Starting server. Listening on port {APP_PORT_GRPC}.')

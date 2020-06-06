@@ -2,15 +2,13 @@ import os
 import gym
 import ray
 from ray.rllib.agents import ppo
+from roadwork.client import RayEnvironment as RwRayEnvironment
 
-import roadwork as rw
-
-SERVER_GRPC_PORT = os.getenv("SERVER_GRPC_PORT", 50050)
 CHECKPOINT_DIR = "/mnt/e/Projects/roadwork-rl/output-server/cartpole-checkpoint"
 CHECKPOINT_FILE = "last_checkpoint.out"
 
 ray.init()
-trainer = ppo.PPOTrainer(env=rw.RayEnvironment, config={ "env_config": {
+trainer = ppo.PPOTrainer(env=RwRayEnvironment, config={ "env_config": {
     "rw_sim": "openai",
     "rw_env": "CartPole-v0",
     "rw_grpc_host": "localhost",
