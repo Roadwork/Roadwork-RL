@@ -2,7 +2,6 @@ import os
 import gym
 import ray
 from ray.rllib.agents import ppo
-
 from roadwork.client import RayEnvironment as RwRayEnvironment
 
 CHECKPOINT_DIR = "/mnt/e/Projects/roadwork-rl/output-server/lunar-lander-continuous-checkpoint"
