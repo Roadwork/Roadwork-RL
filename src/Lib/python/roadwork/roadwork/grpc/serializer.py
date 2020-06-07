@@ -66,7 +66,7 @@ def serializeMetaTuple(t):
 
     for t in t.spaces:
         tCN = t.__class__.__name__
-        serializedTupleValue = serialize(t)
+        serializedTupleValue = serializeMeta(t)
         result.spaces.extend([ serializedTupleValue ])
 
     return result

@@ -5,7 +5,11 @@ import time
 from concurrent import futures
 from datetime import datetime
 
+import gym.spaces.utils as gym_utils
+
 import grpc
+import numpy as np
+import traceback
 
 # Custom Protobuf
 # import proto_compiled.roadwork_pb2 as roadwork_messages # Contains Message Classes
@@ -13,6 +17,7 @@ import grpc
 
 from roadwork.proto import api_v1, api_service_v1
 from roadwork.grpc import Serializer
+from roadwork.grpc import Unserializer
 
 import protobuf_helpers
 
@@ -62,16 +67,28 @@ class RoadworkServicer(api_service_v1.RoadworkServicer):
         return res
 
     def Step(self, request, context): # StepRequest
-        # Returns 0 = obs_jsonable, 1 = reward, 2 = done, 3 = info in object (e.g. {'TimeLimit.truncated': True})
-        observation, reward, isDone, info = envs.step(request.instanceId, request.action, request.render)
+        try:
+            # Get action space
+            action_space = envs.get_action_space_info(request.instanceId)
+            actions = Unserializer.unserializeAction(action_space, request.actions)
 
-        # Observation Space
-        res_osi = envs.get_observation_space_info(request.instanceId)
-        space_wrapper = Serializer.serialize(res_osi, observation)
+            # Returns 0 = obs_jsonable, 1 = reward, 2 = done, 3 = info in object (e.g. {'TimeLimit.truncated': True})
+            observation, reward, isDone, info = envs.step(request.instanceId, actions, request.render)
 
-        # Encode Info (sometimes it can contain a bool)
-        info = ProtoUtil.json_object_to_proto_map(info)
-        res = api_v1.StepResponse(reward=reward, isDone=isDone, info=info, observation=space_wrapper)
+            # Get Observation Space Info (gym.spaces)
+            res_env = envs._lookup_env(request.instanceId)
+            res_osi = res_env.observation_space
+
+            # Flatten this so we can send over wire
+            observation = gym_utils.flatten(res_osi, observation) # @todo: res_osi should be cached
+
+            # Encode Info (sometimes it can contain a bool)
+            info = ProtoUtil.json_object_to_proto_map(info)
+            res = api_v1.StepResponse(reward=reward, isDone=isDone, info=info, observation=observation)
+        except:
+            print(sys.exc_info())
+            traceback.print_tb(sys.exc_info()[2])
+            raise
         
         return res
 
@@ -86,7 +103,7 @@ class RoadworkServicer(api_service_v1.RoadworkServicer):
         return
 
     def ActionSpaceSample(self, request, context): # ActionSpaceSampleResponse
-        res = api_v1.ActionSpaceSampleResponse(action=envs.get_action_space_sample(request.instanceId))
+        res = api_v1.ActionSpaceSampleResponse(actions=envs.get_action_space_sample(request.instanceId))
         return res
 
     def ActionSpaceInfo(self, request, context): # ActionSpaceInfoResponse

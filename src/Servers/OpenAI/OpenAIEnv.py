@@ -94,10 +94,12 @@ class Envs(object):
     def step(self, instance_id, action, render):
         try:
             env = self._lookup_env(instance_id)
+
             if isinstance(action, six.integer_types):
                 nice_action = action
             else:
                 nice_action = np.array(action)
+
             if render:
                 env.render()
             

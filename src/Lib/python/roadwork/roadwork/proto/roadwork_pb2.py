@@ -18,7 +18,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='roadwork',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\x0eroadwork.proto\x12\x08roadwork\"!\n\x0b\x42\x61seRequest\x12\x12\n\ninstanceId\x18\x01 \x01(\t\"A\n\x0bStepRequest\x12\x12\n\ninstanceId\x18\x01 \x01(\t\x12\x0e\n\x06\x61\x63tion\x18\x02 \x03(\x01\x12\x0e\n\x06render\x18\x03 \x01(\x08\"\"\n\x0cResetRequest\x12\x12\n\ninstanceId\x18\x01 \x01(\t\"1\n\rRenderRequest\x12\x12\n\ninstanceId\x18\x01 \x01(\t\x12\x0c\n\x04mode\x18\x02 \x01(\t\"\"\n\x0c\x43loseRequest\x12\x12\n\ninstanceId\x18\x01 \x01(\t\"\x1e\n\rCreateRequest\x12\r\n\x05\x65nvId\x18\x01 \x01(\t\".\n\x18\x41\x63tionSpaceSampleRequest\x12\x12\n\ninstanceId\x18\x01 \x01(\t\",\n\x16\x41\x63tionSpaceInfoRequest\x12\x12\n\ninstanceId\x18\x01 \x01(\t\"1\n\x1bObservationSpaceInfoRequest\x12\x12\n\ninstanceId\x18\x01 \x01(\t\"\x0e\n\x0c\x42\x61seResponse\"\xb8\x01\n\x0cStepResponse\x12\x0e\n\x06reward\x18\x01 \x01(\x02\x12\x0e\n\x06isDone\x18\x02 \x01(\x08\x12.\n\x04info\x18\x03 \x03(\x0b\x32 .roadwork.StepResponse.InfoEntry\x12+\n\x0bobservation\x18\x04 \x01(\x0b\x32\x16.roadwork.SpaceWrapper\x1a+\n\tInfoEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"$\n\rResetResponse\x12\x13\n\x0bobservation\x18\x01 \x03(\x01\"\x10\n\x0eRenderResponse\"\x0f\n\rCloseResponse\"$\n\x0e\x43reateResponse\x12\x12\n\ninstanceId\x18\x01 \x01(\t\"+\n\x19\x41\x63tionSpaceSampleResponse\x12\x0e\n\x06\x61\x63tion\x18\x01 \x01(\x05\"E\n\x17\x41\x63tionSpaceInfoResponse\x12*\n\x06result\x18\x01 \x01(\x0b\x32\x1a.roadwork.MetaSpaceWrapper\"J\n\x1cObservationSpaceInfoResponse\x12*\n\x06result\x18\x01 \x01(\x0b\x32\x1a.roadwork.MetaSpaceWrapper\"R\n\x0cMetaSpaceBox\x12\r\n\x05shape\x18\x01 \x03(\r\x12\x33\n\ndimensions\x18\x02 \x03(\x0b\x32\x1f.roadwork.MetaSpaceBoxDimension\"2\n\x15MetaSpaceBoxDimension\x12\x0b\n\x03low\x18\x01 \x01(\x01\x12\x0c\n\x04high\x18\x02 \x01(\x01\"M\n\x1bMetaSpaceBoxDimensionDouble\x12\x0b\n\x03low\x18\x01 \x03(\x01\x12\x0c\n\x04high\x18\x02 \x03(\x01\x12\x13\n\x0bobservation\x18\x03 \x03(\x01\"\x1e\n\x11MetaSpaceDiscrete\x12\t\n\x01n\x18\x01 \x01(\r\"<\n\x0eMetaSpaceTuple\x12*\n\x06spaces\x18\x01 \x03(\x0b\x32\x1a.roadwork.MetaSpaceWrapper\"\x9d\x01\n\x10MetaSpaceWrapper\x12%\n\x03\x62ox\x18\x01 \x01(\x0b\x32\x16.roadwork.MetaSpaceBoxH\x00\x12/\n\x08\x64iscrete\x18\x02 \x01(\x0b\x32\x1b.roadwork.MetaSpaceDiscreteH\x00\x12)\n\x05tuple\x18\x03 \x01(\x0b\x32\x18.roadwork.MetaSpaceTupleH\x00\x42\x06\n\x04type\"\x8d\x01\n\x0cSpaceWrapper\x12!\n\x03\x62ox\x18\x01 \x01(\x0b\x32\x12.roadwork.SpaceBoxH\x00\x12+\n\x08\x64iscrete\x18\x02 \x01(\x0b\x32\x17.roadwork.SpaceDiscreteH\x00\x12%\n\x05tuple\x18\x03 \x01(\x0b\x32\x14.roadwork.SpaceTupleH\x00\x42\x06\n\x04type\"$\n\rSpaceDiscrete\x12\x13\n\x0bobservation\x18\x01 \x01(\x05\"\x1f\n\x08SpaceBox\x12\x13\n\x0bobservation\x18\x01 \x03(\x01\"4\n\nSpaceTuple\x12&\n\x06tuples\x18\x01 \x03(\x0b\x32\x16.roadwork.SpaceWrapper2\xdd\x05\n\x08Roadwork\x12=\n\x06\x43reate\x12\x17.roadwork.CreateRequest\x1a\x18.roadwork.CreateResponse\"\x00\x12\x37\n\x04Step\x12\x15.roadwork.StepRequest\x1a\x16.roadwork.StepResponse\"\x00\x12:\n\x05Reset\x12\x16.roadwork.ResetRequest\x1a\x17.roadwork.ResetResponse\"\x00\x12=\n\x06Render\x12\x17.roadwork.RenderRequest\x1a\x18.roadwork.RenderResponse\"\x00\x12:\n\x05\x43lose\x12\x16.roadwork.CloseRequest\x1a\x17.roadwork.CloseResponse\"\x00\x12^\n\x11\x41\x63tionSpaceSample\x12\".roadwork.ActionSpaceSampleRequest\x1a#.roadwork.ActionSpaceSampleResponse\"\x00\x12X\n\x0f\x41\x63tionSpaceInfo\x12 .roadwork.ActionSpaceInfoRequest\x1a!.roadwork.ActionSpaceInfoResponse\"\x00\x12g\n\x14ObservationSpaceInfo\x12%.roadwork.ObservationSpaceInfoRequest\x1a&.roadwork.ObservationSpaceInfoResponse\"\x00\x12?\n\x0cMonitorStart\x12\x15.roadwork.BaseRequest\x1a\x16.roadwork.BaseResponse\"\x00\x12>\n\x0bMonitorStop\x12\x15.roadwork.BaseRequest\x1a\x16.roadwork.BaseResponse\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x0eroadwork.proto\x12\x08roadwork\"!\n\x0b\x42\x61seRequest\x12\x12\n\ninstanceId\x18\x01 \x01(\t\"B\n\x0bStepRequest\x12\x12\n\ninstanceId\x18\x01 \x01(\t\x12\x0f\n\x07\x61\x63tions\x18\x02 \x03(\x01\x12\x0e\n\x06render\x18\x03 \x01(\x08\"\"\n\x0cResetRequest\x12\x12\n\ninstanceId\x18\x01 \x01(\t\"1\n\rRenderRequest\x12\x12\n\ninstanceId\x18\x01 \x01(\t\x12\x0c\n\x04mode\x18\x02 \x01(\t\"\"\n\x0c\x43loseRequest\x12\x12\n\ninstanceId\x18\x01 \x01(\t\"\x1e\n\rCreateRequest\x12\r\n\x05\x65nvId\x18\x01 \x01(\t\".\n\x18\x41\x63tionSpaceSampleRequest\x12\x12\n\ninstanceId\x18\x01 \x01(\t\",\n\x16\x41\x63tionSpaceInfoRequest\x12\x12\n\ninstanceId\x18\x01 \x01(\t\"1\n\x1bObservationSpaceInfoRequest\x12\x12\n\ninstanceId\x18\x01 \x01(\t\"\x0e\n\x0c\x42\x61seResponse\"\xa0\x01\n\x0cStepResponse\x12\x0e\n\x06reward\x18\x01 \x01(\x02\x12\x0e\n\x06isDone\x18\x02 \x01(\x08\x12.\n\x04info\x18\x03 \x03(\x0b\x32 .roadwork.StepResponse.InfoEntry\x12\x13\n\x0bobservation\x18\x04 \x03(\x01\x1a+\n\tInfoEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"$\n\rResetResponse\x12\x13\n\x0bobservation\x18\x01 \x03(\x01\"\x10\n\x0eRenderResponse\"\x0f\n\rCloseResponse\"$\n\x0e\x43reateResponse\x12\x12\n\ninstanceId\x18\x01 \x01(\t\"+\n\x19\x41\x63tionSpaceSampleResponse\x12\x0e\n\x06\x61\x63tion\x18\x01 \x03(\x01\"E\n\x17\x41\x63tionSpaceInfoResponse\x12*\n\x06result\x18\x01 \x01(\x0b\x32\x1a.roadwork.MetaSpaceWrapper\"J\n\x1cObservationSpaceInfoResponse\x12*\n\x06result\x18\x01 \x01(\x0b\x32\x1a.roadwork.MetaSpaceWrapper\"R\n\x0cMetaSpaceBox\x12\r\n\x05shape\x18\x01 \x03(\r\x12\x33\n\ndimensions\x18\x02 \x03(\x0b\x32\x1f.roadwork.MetaSpaceBoxDimension\"2\n\x15MetaSpaceBoxDimension\x12\x0b\n\x03low\x18\x01 \x01(\x01\x12\x0c\n\x04high\x18\x02 \x01(\x01\"M\n\x1bMetaSpaceBoxDimensionDouble\x12\x0b\n\x03low\x18\x01 \x03(\x01\x12\x0c\n\x04high\x18\x02 \x03(\x01\x12\x13\n\x0bobservation\x18\x03 \x03(\x01\"\x1e\n\x11MetaSpaceDiscrete\x12\t\n\x01n\x18\x01 \x01(\r\"<\n\x0eMetaSpaceTuple\x12*\n\x06spaces\x18\x01 \x03(\x0b\x32\x1a.roadwork.MetaSpaceWrapper\"\x9d\x01\n\x10MetaSpaceWrapper\x12%\n\x03\x62ox\x18\x01 \x01(\x0b\x32\x16.roadwork.MetaSpaceBoxH\x00\x12/\n\x08\x64iscrete\x18\x02 \x01(\x0b\x32\x1b.roadwork.MetaSpaceDiscreteH\x00\x12)\n\x05tuple\x18\x03 \x01(\x0b\x32\x18.roadwork.MetaSpaceTupleH\x00\x42\x06\n\x04type\"\x8d\x01\n\x0cSpaceWrapper\x12!\n\x03\x62ox\x18\x01 \x01(\x0b\x32\x12.roadwork.SpaceBoxH\x00\x12+\n\x08\x64iscrete\x18\x02 \x01(\x0b\x32\x17.roadwork.SpaceDiscreteH\x00\x12%\n\x05tuple\x18\x03 \x01(\x0b\x32\x14.roadwork.SpaceTupleH\x00\x42\x06\n\x04type\"$\n\rSpaceDiscrete\x12\x13\n\x0bobservation\x18\x01 \x01(\x05\"\x1f\n\x08SpaceBox\x12\x13\n\x0bobservation\x18\x01 \x03(\x01\"4\n\nSpaceTuple\x12&\n\x06tuples\x18\x01 \x03(\x0b\x32\x16.roadwork.SpaceWrapper2\xdd\x05\n\x08Roadwork\x12=\n\x06\x43reate\x12\x17.roadwork.CreateRequest\x1a\x18.roadwork.CreateResponse\"\x00\x12\x37\n\x04Step\x12\x15.roadwork.StepRequest\x1a\x16.roadwork.StepResponse\"\x00\x12:\n\x05Reset\x12\x16.roadwork.ResetRequest\x1a\x17.roadwork.ResetResponse\"\x00\x12=\n\x06Render\x12\x17.roadwork.RenderRequest\x1a\x18.roadwork.RenderResponse\"\x00\x12:\n\x05\x43lose\x12\x16.roadwork.CloseRequest\x1a\x17.roadwork.CloseResponse\"\x00\x12^\n\x11\x41\x63tionSpaceSample\x12\".roadwork.ActionSpaceSampleRequest\x1a#.roadwork.ActionSpaceSampleResponse\"\x00\x12X\n\x0f\x41\x63tionSpaceInfo\x12 .roadwork.ActionSpaceInfoRequest\x1a!.roadwork.ActionSpaceInfoResponse\"\x00\x12g\n\x14ObservationSpaceInfo\x12%.roadwork.ObservationSpaceInfoRequest\x1a&.roadwork.ObservationSpaceInfoResponse\"\x00\x12?\n\x0cMonitorStart\x12\x15.roadwork.BaseRequest\x1a\x16.roadwork.BaseResponse\"\x00\x12>\n\x0bMonitorStop\x12\x15.roadwork.BaseRequest\x1a\x16.roadwork.BaseResponse\"\x00\x62\x06proto3'
 )
 
 
@@ -70,7 +70,7 @@ _STEPREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='action', full_name='roadwork.StepRequest.action', index=1,
+      name='actions', full_name='roadwork.StepRequest.actions', index=1,
       number=2, type=1, cpp_type=5, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -96,7 +96,7 @@ _STEPREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=63,
-  serialized_end=128,
+  serialized_end=129,
 )
 
 
@@ -126,8 +126,8 @@ _RESETREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=130,
-  serialized_end=164,
+  serialized_start=131,
+  serialized_end=165,
 )
 
 
@@ -164,8 +164,8 @@ _RENDERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=166,
-  serialized_end=215,
+  serialized_start=167,
+  serialized_end=216,
 )
 
 
@@ -195,8 +195,8 @@ _CLOSEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=217,
-  serialized_end=251,
+  serialized_start=218,
+  serialized_end=252,
 )
 
 
@@ -226,8 +226,8 @@ _CREATEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=253,
-  serialized_end=283,
+  serialized_start=254,
+  serialized_end=284,
 )
 
 
@@ -257,8 +257,8 @@ _ACTIONSPACESAMPLEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=285,
-  serialized_end=331,
+  serialized_start=286,
+  serialized_end=332,
 )
 
 
@@ -288,8 +288,8 @@ _ACTIONSPACEINFOREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=333,
-  serialized_end=377,
+  serialized_start=334,
+  serialized_end=378,
 )
 
 
@@ -319,8 +319,8 @@ _OBSERVATIONSPACEINFOREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=379,
-  serialized_end=428,
+  serialized_start=380,
+  serialized_end=429,
 )
 
 
@@ -343,8 +343,8 @@ _BASERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=430,
-  serialized_end=444,
+  serialized_start=431,
+  serialized_end=445,
 )
 
 
@@ -381,8 +381,8 @@ _STEPRESPONSE_INFOENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=588,
-  serialized_end=631,
+  serialized_start=565,
+  serialized_end=608,
 )
 
 _STEPRESPONSE = _descriptor.Descriptor(
@@ -415,8 +415,8 @@ _STEPRESPONSE = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='observation', full_name='roadwork.StepResponse.observation', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      number=4, type=1, cpp_type=5, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -432,8 +432,8 @@ _STEPRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=447,
-  serialized_end=631,
+  serialized_start=448,
+  serialized_end=608,
 )
 
 
@@ -463,8 +463,8 @@ _RESETRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=633,
-  serialized_end=669,
+  serialized_start=610,
+  serialized_end=646,
 )
 
 
@@ -487,8 +487,8 @@ _RENDERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=671,
-  serialized_end=687,
+  serialized_start=648,
+  serialized_end=664,
 )
 
 
@@ -511,8 +511,8 @@ _CLOSERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=689,
-  serialized_end=704,
+  serialized_start=666,
+  serialized_end=681,
 )
 
 
@@ -542,8 +542,8 @@ _CREATERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=706,
-  serialized_end=742,
+  serialized_start=683,
+  serialized_end=719,
 )
 
 
@@ -556,8 +556,8 @@ _ACTIONSPACESAMPLERESPONSE = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='action', full_name='roadwork.ActionSpaceSampleResponse.action', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      number=1, type=1, cpp_type=5, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -573,8 +573,8 @@ _ACTIONSPACESAMPLERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=744,
-  serialized_end=787,
+  serialized_start=721,
+  serialized_end=764,
 )
 
 
@@ -604,8 +604,8 @@ _ACTIONSPACEINFORESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=789,
-  serialized_end=858,
+  serialized_start=766,
+  serialized_end=835,
 )
 
 
@@ -635,8 +635,8 @@ _OBSERVATIONSPACEINFORESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=860,
-  serialized_end=934,
+  serialized_start=837,
+  serialized_end=911,
 )
 
 
@@ -673,8 +673,8 @@ _METASPACEBOX = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=936,
-  serialized_end=1018,
+  serialized_start=913,
+  serialized_end=995,
 )
 
 
@@ -711,8 +711,8 @@ _METASPACEBOXDIMENSION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1020,
-  serialized_end=1070,
+  serialized_start=997,
+  serialized_end=1047,
 )
 
 
@@ -756,8 +756,8 @@ _METASPACEBOXDIMENSIONDOUBLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1072,
-  serialized_end=1149,
+  serialized_start=1049,
+  serialized_end=1126,
 )
 
 
@@ -787,8 +787,8 @@ _METASPACEDISCRETE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1151,
-  serialized_end=1181,
+  serialized_start=1128,
+  serialized_end=1158,
 )
 
 
@@ -818,8 +818,8 @@ _METASPACETUPLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1183,
-  serialized_end=1243,
+  serialized_start=1160,
+  serialized_end=1220,
 )
 
 
@@ -866,8 +866,8 @@ _METASPACEWRAPPER = _descriptor.Descriptor(
       name='type', full_name='roadwork.MetaSpaceWrapper.type',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=1246,
-  serialized_end=1403,
+  serialized_start=1223,
+  serialized_end=1380,
 )
 
 
@@ -914,8 +914,8 @@ _SPACEWRAPPER = _descriptor.Descriptor(
       name='type', full_name='roadwork.SpaceWrapper.type',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=1406,
-  serialized_end=1547,
+  serialized_start=1383,
+  serialized_end=1524,
 )
 
 
@@ -945,8 +945,8 @@ _SPACEDISCRETE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1549,
-  serialized_end=1585,
+  serialized_start=1526,
+  serialized_end=1562,
 )
 
 
@@ -976,8 +976,8 @@ _SPACEBOX = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1587,
-  serialized_end=1618,
+  serialized_start=1564,
+  serialized_end=1595,
 )
 
 
@@ -1007,13 +1007,12 @@ _SPACETUPLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1620,
-  serialized_end=1672,
+  serialized_start=1597,
+  serialized_end=1649,
 )
 
 _STEPRESPONSE_INFOENTRY.containing_type = _STEPRESPONSE
 _STEPRESPONSE.fields_by_name['info'].message_type = _STEPRESPONSE_INFOENTRY
-_STEPRESPONSE.fields_by_name['observation'].message_type = _SPACEWRAPPER
 _ACTIONSPACEINFORESPONSE.fields_by_name['result'].message_type = _METASPACEWRAPPER
 _OBSERVATIONSPACEINFORESPONSE.fields_by_name['result'].message_type = _METASPACEWRAPPER
 _METASPACEBOX.fields_by_name['dimensions'].message_type = _METASPACEBOXDIMENSION
@@ -1286,8 +1285,8 @@ _ROADWORK = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=1675,
-  serialized_end=2408,
+  serialized_start=1652,
+  serialized_end=2385,
   methods=[
   _descriptor.MethodDescriptor(
     name='Create',

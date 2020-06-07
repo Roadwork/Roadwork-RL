@@ -1,15 +1,43 @@
 import gym.spaces
 from gym.spaces import Tuple, Box, Discrete, MultiDiscrete, MultiBinary, Tuple, Dict
+from google.protobuf.json_format import MessageToDict, MessageToJson
 import numpy as np
+import json
 
-def unserialize(obj):
-    if obj.HasField('discrete'):
-        return obj.discrete
-    elif obj.HasField('box'):
-        return np.array(obj.box.observation)
+def unserializeAction(action_space_info, actions):
+    if action_space_info.HasField('discrete'):
+        return int(actions[0])
+    elif action_space_info.HasField('box'):
+        return actions
+    # elif obj.HasField('tuple'):
+    #     return unserializeMetaTuple(obj.tuple)
     else:
         print("Unsupported Space Type:")
-        print(obj)
+        print(action_space_info)
+        return actions
+
+    # print(action_space_info)
+    # json_str = MessageToJson(actions, including_default_value_fields=True)
+    # json = json.loads(json_str)
+    # return json
+
+def unserialize(obj):
+    return json.loads(MessageToJson(obj, including_default_value_fields = True))
+    # # if dict, MessageToDict(msg)
+    # print("UNSERIALIZING")
+    # print(type(obj))
+    # print("1")
+    # print(MessageToJson(obj, preserving_proto_field_name = True))
+    # print("2")
+    # print(type(MessageToJson(obj)))
+    # print("UNSERIALIZING DONE")
+    # if obj.HasField('discrete'):
+    #     return obj.discrete
+    # elif obj.HasField('box'):
+    #     return np.array(obj.box.observation)
+    # else:
+    #     print("Unsupported Space Type:")
+    #     print(obj)
 
 # https://github.com/openai/gym/tree/master/gym/spaces
 def unserializeMeta(obj):

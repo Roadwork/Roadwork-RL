@@ -4,10 +4,13 @@ import sys
 import numpy as np
 import grpc
 
+import gym.spaces.utils as gym_utils
+
 # Roadwork
 import roadwork.proto.roadwork_pb2 as api_v1
 import roadwork.proto.roadwork_pb2_grpc as api_service_v1
 from roadwork.grpc import Unserializer
+
 
 from google.protobuf.any_pb2 import Any
 from datetime import datetime
@@ -28,6 +31,13 @@ class Client:
         res = self.client.Create(req)
 
         self.instanceId = res.instanceId
+        
+        print("Getting Action Space")
+        self.action_space = self.ActionSpaceInfo()
+
+        print("Getting Observation Space")
+        self.observation_space = self.ObservationSpaceInfo()
+        print(self.observation_space)
 
     def Reset(self):
         req = api_v1.ResetRequest(instanceId=self.instanceId)
@@ -49,13 +59,19 @@ class Client:
         res = self.client.ObservationSpaceInfo(req)
         return Unserializer.unserializeMeta(res.result)
 
-    def Step(self, action):
-        req = api_v1.StepRequest(instanceId=self.instanceId, action=action)
+    def Step(self, actions):
+        # Make sure actions is a list
+        if isinstance(actions, np.ndarray):
+            actions = actions.tolist()
+        elif not isinstance(actions, list):
+            actions = [ actions ]
+
+        req = api_v1.StepRequest(instanceId=self.instanceId, actions=actions)
         res = self.client.Step(req)
 
         reward = res.reward
         done = res.isDone
-        obs = Unserializer.unserialize(res.observation)
+        obs = gym_utils.unflatten(self.observation_space, res.observation)
         info = {} # @TODO, convert Protobuf map<string, string> to Dict
 
         return [ obs, reward, done, info ]

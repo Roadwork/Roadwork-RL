@@ -65,7 +65,7 @@ message BaseRequest {
 
 message StepRequest {
     string instanceId = 1; // The instanceId of the environment
-    repeated double action = 2; // The action provided by the agent (@todo: the datatype doesn't exist...)
+    repeated double actions = 2; // The action provided by the agent (@todo: the datatype doesn't exist...)
     bool render = 3; // Do we need to render? (@todo)
 }
 
@@ -107,7 +107,8 @@ message StepResponse {
     float reward = 1; // The reward received after taking the previous action
     bool isDone = 2; // Has the episode ended?
     map<string, string> info = 3; // Diagnostic information
-    SpaceWrapper observation = 4;
+    repeated double observation = 4;
+    // SpaceWrapper observation = 4;
 }
 
 message ResetResponse {
@@ -123,7 +124,7 @@ message CreateResponse {
 }
 
 message ActionSpaceSampleResponse {
-    int32 action = 1; // Note: Serialized as bytes!
+    repeated double action = 1; // Note: Serialized as bytes!
 }
 
 message ActionSpaceInfoResponse {
