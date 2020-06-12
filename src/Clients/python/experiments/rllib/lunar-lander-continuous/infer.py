@@ -5,7 +5,7 @@ from ray.rllib.agents import ppo
 from roadwork.client import RayEnvironment as RwRayEnvironment
 
 CHECKPOINT_DIR = "/mnt/e/Projects/roadwork-rl/output-server/lunar-lander-continuous-checkpoint"
-CHECKPOINT_FILE = "checkpoint_107/checkpoint-107"
+CHECKPOINT_FILE = "checkpoint_99/checkpoint-99"
 
 ray.init()
 

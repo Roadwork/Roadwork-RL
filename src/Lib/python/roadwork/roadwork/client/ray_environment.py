@@ -15,22 +15,22 @@ class RayEnvironment(gym.Env):
         print(f"==================================================")
 
         self.env = Client(env_config["rw_sim"], env_config["rw_env"])
-        self.env.Init(env_config["rw_grpc_host"], env_config["rw_grpc_port"])
-        self.action_space = self.env.ActionSpaceInfo()
+        self.env.init(env_config["rw_grpc_host"], env_config["rw_grpc_port"])
+        self.action_space = self.env.action_space_info()
         print(f"Action Space: {self.action_space}") # Lunar Lander: Nop, Fire Left, Fire Main, Fire Right
-        self.observation_space = self.env.ObservationSpaceInfo()
+        self.observation_space = self.env.observation_space_info()
         print(f"Observation Space: {self.observation_space}") 
 
     def reset(self):
-        res = self.env.Reset()
+        res = self.env.reset()
         return res
     
     def step(self, action):
-        res = self.env.Step(action)
+        res = self.env.step(action)
         return res
 
     def monitor(self):
-        self.env.MonitorStart()
+        self.env.monitor_start()
 
     def monitor_stop(self):
-        self.env.MonitorStop()
+        self.env.monitor_stop()

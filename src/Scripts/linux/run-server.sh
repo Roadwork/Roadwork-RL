@@ -4,6 +4,12 @@ OUTPUT_DIR=$2 # Where to put the output files in
 CURRENT_DIR=$(pwd)
 SERVER_PATH="$CURRENT_DIR/Servers/$SERVER_NAME"
 
+if [ -z $1 -o -z $2 ]; then
+  echo "Usage: $0 <SERVER_NAME> OUTPUT_DIR"
+  echo "Example: $0 OpenAI ./output/server"
+  exit 1
+fi
+
 export ROADWORK_OUTPUT_DIR=$OUTPUT_DIR
 
 # Install Dependencies

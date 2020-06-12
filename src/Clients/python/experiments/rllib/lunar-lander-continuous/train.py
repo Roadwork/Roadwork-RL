@@ -10,6 +10,8 @@ CHECKPOINT_FILE = "last_checkpoint.out"
 ray.init()
 
 # Configure RLLib with The Roadwork Environment
+# see common config: https://rllib.readthedocs.io/en/latest/rllib-training.html#common-parameters
+# see ppo   config: https://rllib.readthedocs.io/en/latest/rllib-algorithms.html#ppo
 trainer = ppo.PPOTrainer(env=RwRayEnvironment, config={ "env_config": {
     "rw_sim": "openai",
     "rw_env": "LunarLanderContinuous-v2",
