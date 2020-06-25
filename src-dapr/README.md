@@ -1,4 +1,9 @@
-Work in progress
+# Roadwork-RL through Dapr - Work in progress
+
+## Architecture
+
+![](../assets/roadwork-rl-abstraction.png)
+![](../assets/roadwork-rl-cluster.png)
 
 ## Installation
 
@@ -46,3 +51,4 @@ sudo dapr run --app-id demo-actor --app-port 3000 python3 ./main.py
 # 4. Run Experiment (in different window, also in src-dapr folder)
 sudo dapr run --app-id demo-client python3 ./Experiments/baselines/cartpole/train.py
 ```
+
