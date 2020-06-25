@@ -23,21 +23,6 @@ def unserializeAction(action_space_info, actions):
 
 def unserialize(obj):
     return json.loads(MessageToJson(obj, including_default_value_fields = True))
-    # # if dict, MessageToDict(msg)
-    # print("UNSERIALIZING")
-    # print(type(obj))
-    # print("1")
-    # print(MessageToJson(obj, preserving_proto_field_name = True))
-    # print("2")
-    # print(type(MessageToJson(obj)))
-    # print("UNSERIALIZING DONE")
-    # if obj.HasField('discrete'):
-    #     return obj.discrete
-    # elif obj.HasField('box'):
-    #     return np.array(obj.box.observation)
-    # else:
-    #     print("Unsupported Space Type:")
-    #     print(obj)
 
 # https://github.com/openai/gym/tree/master/gym/spaces
 def unserializeMeta(obj):

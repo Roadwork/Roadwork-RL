@@ -31,7 +31,6 @@ RUN pip install -r requirements.txt
 
 # Copy Source Code
 COPY . .
-RUN cd /app/Lib/python/roadwork; pip install -e .; cd /app
 
 # Fix line endings on our start script
 RUN dos2unix docker/start.sh
