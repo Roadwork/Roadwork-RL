@@ -22,6 +22,19 @@ class ActorOpenAI(Actor, RoadworkActorInterface):
         self.env = None # Placeholder
         self.actor_id = actor_id
 
+    async def sim_get_data(self, data) -> object:
+        key = data['key']
+        has_value, val = await self._state_manager.try_get_state(key)
+        return val
+
+    async def sim_set_data(self, data) -> None:
+        key = data['key']
+        value = data['value']
+
+        print(f'Setting Sim State for key {key}', flush=True)
+        await self._state_manager.set_state(key, value)
+        await self._state_manager.save_state()
+
     async def _on_activate(self) -> None:
         """An callback which will be called whenever actor is activated."""
         print(f'Activate {self.__class__.__name__} actor!', flush=True)

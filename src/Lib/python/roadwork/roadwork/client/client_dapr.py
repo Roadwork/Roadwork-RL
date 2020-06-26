@@ -53,6 +53,13 @@ class ClientDapr:
     def action_space_info(self):
         return self.action_space
 
+    def set_data(self, key, value):
+        asyncio.get_event_loop().run_until_complete(self.proxy.SimSetData({ 'key': key, 'value': value }))
+
+    def get_data(self, key):
+        res = asyncio.get_event_loop().run_until_complete(self.proxy.SimGetData({ 'key': key }))
+        return res
+
     def reset(self):
         obs = asyncio.get_event_loop().run_until_complete(self.proxy.SimReset())
         return obs

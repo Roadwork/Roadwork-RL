@@ -16,7 +16,8 @@ wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O 
 
 sudo dapr init
 
-# 2. Dapr Python install
+# 2. Dapr Dev Python install
+# Note: 3.7 is required for Asyncio.run to be available
 git clone https://github.com/dapr/python-sdk.git
 modify setup.cfg and change > 3.8 to > 3.7
 pip install -e
@@ -26,7 +27,9 @@ sudo apt-get install ffmpeg python-opengl xvfb
 sudo pip3 install gym
 sudo pip3 install flask
 sudo pip3 install -r dev-requirements.txt # in src-dapr/
-sudo pip3 install dapr
+sudo pip3 install nest-asyncio
+sudo pip3 install stable-baselines
+sudo pip3 install tensorflow==1.14.0
 
 # 4. Install Roadwork Library
 cd src/Lib/python/roadwork
@@ -39,7 +42,7 @@ You can now run an experiment, for that following these steps:
 
 ```bash
 # 1. Start X Server for rendering
-xvfb -screen 0 1024x768x24 &
+Xvfb -screen 0 1024x768x24 &
 export DISPLAY=:0
 
 # 2. Navigate to Dapr Folder

@@ -8,6 +8,8 @@ import json
 def unserializeMeta(obj):
     if obj['name'] == 'Discrete':
         return unserializeMetaDiscrete(obj)
+    elif obj['name'] == 'MultiDiscrete':
+        return unserializeMetaMultiDiscrete(obj)
     elif obj['name'] == 'Box':
         return unserializeMetaBox(obj)
     elif obj['name'] == 'Tuple':
@@ -28,6 +30,9 @@ def unserializeMetaBox(obj):
 
 def unserializeMetaDiscrete(obj):
     return Discrete(obj['n'])
+
+def unserializeMetaMultiDiscrete(obj):
+    return MultiDiscrete(obj['nvec'])
 
 # https://github.com/openai/gym/blob/master/gym/spaces/tuple.py
 def unserializeMetaTuple(obj):

@@ -16,6 +16,8 @@ def serializeMeta(space):
         res = serializeMetaBox(res, space)
     elif res['name'] == 'Discrete':
         res = serializeMetaDiscrete(res, space)
+    elif res['name'] == 'MultiDiscrete':
+        res = serializeMetaMultiDiscrete(res, space)
     elif res['name'] == 'Tuple':
         res = serializeMetaTuple(res, space)
     else:
@@ -41,6 +43,10 @@ def serializeMetaBox(res, space):
 
 def serializeMetaDiscrete(res, space):
     res['n'] = space.n
+    return res
+
+def serializeMetaMutiDiscrete(res, space):
+    res['nvec'] = space.nvec.tolist()
     return res
 
 # https://github.com/openai/gym/blob/master/gym/spaces/tuple.py

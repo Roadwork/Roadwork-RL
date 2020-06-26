@@ -42,11 +42,11 @@ class RoadworkActorInterface(ActorInterface):
     @actormethod(name="SimObservationSpace")
     def sim_observation_space(self) -> object:
         ...
-    
-    @actormethod(name="GetMyData")
-    async def get_my_data(self) -> object:
+
+    @actormethod(name="SimGetData")
+    async def sim_get_data(self) -> object:
         ...
 
     @actormethod(name="SetMyData")
-    async def set_my_data(self, data: object) -> None:
+    async def sim_set_data(self, key: object, data: object) -> None:
         ...
