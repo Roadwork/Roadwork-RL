@@ -53,11 +53,11 @@ class ClientDapr:
     def action_space_info(self):
         return self.action_space
 
-    def set_data(self, key, value):
-        asyncio.get_event_loop().run_until_complete(self.proxy.SimSetData({ 'key': key, 'value': value }))
+    def set_state(self, key, value):
+        asyncio.get_event_loop().run_until_complete(self.proxy.SimSetState({ 'key': key, 'value': value }))
 
-    def get_data(self, key):
-        res = asyncio.get_event_loop().run_until_complete(self.proxy.SimGetData({ 'key': key }))
+    def get_state(self, key):
+        res = asyncio.get_event_loop().run_until_complete(self.proxy.SimGetState({ 'key': key }))
         return res
 
     def reset(self):

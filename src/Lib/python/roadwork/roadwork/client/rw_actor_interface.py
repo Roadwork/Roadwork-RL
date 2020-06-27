@@ -35,10 +35,10 @@ class RoadworkActorInterface(ActorInterface):
     async def sim_action_sample(self) -> object:
         ...
     
-    @actormethod(name="SimGetData")
-    async def sim_get_data(self) -> object:
+    @actormethod(name="SimGetState")
+    async def sim_get_state(self, data: object) -> object:
         ...
 
-    @actormethod(name="SetMyData")
-    async def sim_set_data(self, key: object, data: object) -> None:
+    @actormethod(name="SimSetState")
+    async def sim_set_state(self, data: object) -> None:
         ...

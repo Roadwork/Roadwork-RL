@@ -22,12 +22,12 @@ class ActorOpenAI(Actor, RoadworkActorInterface):
         self.env = None # Placeholder
         self.actor_id = actor_id
 
-    async def sim_get_data(self, data) -> object:
+    async def sim_get_state(self, data) -> object:
         key = data['key']
         has_value, val = await self._state_manager.try_get_state(key)
         return val
 
-    async def sim_set_data(self, data) -> None:
+    async def sim_set_state(self, data) -> None:
         key = data['key']
         value = data['value']
 
@@ -109,16 +109,3 @@ class ActorOpenAI(Actor, RoadworkActorInterface):
         observation = observation.tolist()
 
         return observation, reward, isDone, info
-
-    async def get_my_data(self) -> object:
-        """An actor method which gets mydata state value."""
-        has_value, val = await self._state_manager.try_get_state('mydata')
-        print(f'has_value: {has_value}', flush=True)
-        return val
-
-    async def set_my_data(self, data) -> None:
-        """An actor method which set mydata state value."""
-        print(f'set_my_data: {data}', flush=True)
-        data['ts'] = datetime.datetime.now(datetime.timezone.utc)
-        await self._state_manager.set_state('mydata', data)
-        await self._state_manager.save_state()
