@@ -50,3 +50,7 @@ class RoadworkActorInterface(ActorInterface):
     @actormethod(name="SimSetState")
     async def sim_set_state(self, data: object) -> None:
         ...
+
+    @actormethod(name="SimCallMethod")
+    async def sim_call_method(self, data: object) -> None:
+        ...

@@ -1,22 +1,41 @@
-import setuptools
+# -*- coding: utf-8 -*-
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+"""
+Copyright (c) Xavier Geerinck.
+Licensed under the MIT License.
+"""
 
-setuptools.setup(
-     name='roadwork',  
-     version='0.0.1',
-     author="Xavier Geerinck",
-     author_email="xavier.geerinck@gmail.com",
-     description="Roadwork-RL - A RL Environment Wrapper",
-     long_description=long_description,
-     long_description_content_type="text/markdown",
-     url="https://github.com/roadwork/roadwork-rl",
-     packages=setuptools.find_packages(),
-     classifiers=[
-         "Programming Language :: Python :: 3",
-         "License :: OSI Approved :: MIT License",
-         "Operating System :: OS Independent",
-     ],
-     python_requires='>=3.6'
- )
+import os
+
+from setuptools import setup
+from subprocess import check_output as run
+
+# Load version in dapr package.
+exec(open('roadwork/version.py').read())
+version = __version__
+
+name = 'roadwork'
+description = 'The official release of Roadwork Python SDK'
+long_description = '''
+Roadwork is a client server framework that allows developers and data scientists to easily 
+run distributed reinforcement learning applications on multi-sim clusters over HTTP.
+Roadwork utilizes the Dapr framework underlying as its stable infrastructure layer, with
+libraries put on top to provide an abstracted way to interact in a OpenAI Gym kind of way.
+'''.lstrip()
+
+# Get build number from GITHUB_RUN_NUMBER environment variable
+build_number = os.environ.get('GITHUB_RUN_NUMBER', '0')
+
+version = f'{__version__}'
+description = 'The developmental release for Roadwork Python SDK.'
+long_description = 'This is the developmental release for Roadwork Python SDK.'
+
+print(f'package name: {name}, version: {version}', flush=True)
+
+
+setup(
+    name=name,
+    version=version,
+    description=description,
+    long_description=long_description,
+)

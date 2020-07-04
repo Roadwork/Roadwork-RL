@@ -5,7 +5,7 @@
 from roadwork.server import RoadworkActorService
 
 # Import our servers
-from Servers.OpenAI.server import ActorOpenAI
+from OpenAI.server import ActorOpenAI
 
 # Start the entire service
 service = RoadworkActorService()

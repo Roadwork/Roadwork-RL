@@ -15,12 +15,21 @@ import gym
 import sys
 import os
 import traceback
+import numpy as np
 
 class ActorOpenAI(Actor, RoadworkActorInterface):
     def __init__(self, ctx, actor_id):
         super(ActorOpenAI, self).__init__(ctx, actor_id)
         self.env = None # Placeholder
         self.actor_id = actor_id
+
+    async def sim_call_method(self, data) -> object:
+        method = data['method']
+        args = data['args'] # Array of arguments - [] 
+        kwargs = data['kwargs'] # Dict 
+
+        return getattr(self.env, method)(*args, **kwargs)
+
 
     async def sim_get_state(self, data) -> object:
         key = data['key']
@@ -78,7 +87,8 @@ class ActorOpenAI(Actor, RoadworkActorInterface):
 
         # observation is a ndarray, we need to serialize this
         # therefore, change it to list type which is serializable
-        observation = observation.tolist()
+        if isinstance(observation, np.ndarray):
+            observation = observation.tolist()
 
         return observation
 
@@ -106,6 +116,7 @@ class ActorOpenAI(Actor, RoadworkActorInterface):
 
         # observation is a ndarray, we need to serialize this
         # therefore, change it to list type which is serializable
-        observation = observation.tolist()
+        if isinstance(observation, np.ndarray):
+            observation = observation.tolist()
 
         return observation, reward, isDone, info

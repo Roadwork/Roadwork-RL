@@ -3,7 +3,7 @@
 # Licensed under the MIT License.
 
 from flask import Flask, jsonify
-from roadwork.flask_dapr.actor import DaprActor
+from flask_dapr.actor import DaprActor
 
 from dapr.conf import settings
 

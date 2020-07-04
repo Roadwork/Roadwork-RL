@@ -31,10 +31,10 @@ class ClientDapr:
     def create(self, envId):
         asyncio.get_event_loop().run_until_complete(self.proxy.SimCreate({ 'env_id': envId }))
 
-        print("[Roadwork][Client] Getting Action Space")
+        # print("[Roadwork][Client] Getting Action Space")
         self.action_space = asyncio.get_event_loop().run_until_complete(self._action_space_info())
 
-        print("[Roadwork][Client] Getting Observation Space")
+        # print("[Roadwork][Client] Getting Observation Space")
         self.observation_space = asyncio.get_event_loop().run_until_complete(self._observation_space_info())
 
     async def _observation_space_info(self):
@@ -60,6 +60,19 @@ class ClientDapr:
         res = asyncio.get_event_loop().run_until_complete(self.proxy.SimGetState({ 'key': key }))
         return res
 
+    def sim_call_method(self, method, *method_args, **method_kwargs):
+        res = asyncio.get_event_loop().run_until_complete(self.proxy.SimCallMethod({ 
+            'method': method,
+            'args': method_args,
+            'kwargs': method_kwargs
+        }))
+
+        if isinstance(res, list):
+            res = res[0] # @todo: assumption is that list gets wrapped again? and then returns one big list, causing us to take element idx 0. But not sure
+
+        return res
+
+
     def reset(self):
         obs = asyncio.get_event_loop().run_until_complete(self.proxy.SimReset())
         return obs
@@ -71,6 +84,9 @@ class ClientDapr:
     def step(self, action):
         if type(action) == np.int64:
             action = int(action)
+
+        if isinstance(action, np.ndarray):
+            action = action.tolist()
 
         obs, reward, done, info = asyncio.get_event_loop().run_until_complete(self.proxy.SimStep({ 'action': action }))
         return [ obs, reward, done, info ]

@@ -24,4 +24,4 @@ echo "Display: $DISPLAY"
 echo "PWD: $(pwd)"
 
 echo "Starting Server"
-python server.py
+python main.py
