@@ -167,13 +167,16 @@ helm install redis bitnami/redis
 echo "Redis is now running, credentials:"
 echo "Host: redis-master:6379"
 echo "Password: $(kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" | base64 --decode)"
+
+# Apply
+kubectl apply -f Server/redis.yaml
 ```
 
 #### 2. Installing Server
 
 ```bash
 # Build Server
-./Scripts/linux/build-server.sh Server/ roadwork.io/sim-server
+./Scripts/linux/build-server.sh Server/ roadwork.io/rw-server
 
 # Remove old Server
 kubectl delete deployment rw-server
