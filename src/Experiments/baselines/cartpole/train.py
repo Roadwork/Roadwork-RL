@@ -20,7 +20,7 @@ if __name__ == '__main__':
     print("===============================================", flush=True)
     print("TRAINING", flush=True)
     print("===============================================", flush=True)
-    cpu = 10
+    cpu = 8
     env = SubprocVecEnv([ lambda: env_create() for _ in range(cpu) ])
 
     model = PPO2(MlpPolicy, env, verbose=1, tensorboard_log="./output/tensorboard")

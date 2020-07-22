@@ -22,13 +22,12 @@ class ClientDapr:
     metadata = { 'render.modes': [ 'human' ] }
 
     def __init__(self, simId):
-        # We create a new asyncio event loop per instance
-        # This way we can utilize multithreading correctly which would else be prone to collisions on the responses
-        # note: collosion = 2 responses at the same time, making an overlap on the first by the second and crashing JSON parsing
-        self.loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(self.loop)
+        # # We create a new asyncio event loop per instance
+        # # This way we can utilize multithreading correctly which would else be prone to collisions on the responses
+        # # note: collosion = 2 responses at the same time, making an overlap on the first by the second and crashing JSON parsing
+        # self.loop = asyncio.new_event_loop()
+        # asyncio.set_event_loop(self.loop)
 
-        # nest_asyncio.apply() # Patch asyncio
         self.simId = simId
 
         self.actor_id = "%s-%s-%s" % ("roadwork", self.simId, str(uuid.uuid4().hex)[:8])
@@ -82,6 +81,15 @@ class ClientDapr:
 
         return res
 
+    @async_to_sync
+    async def set_state(self, key, value):
+        await self.proxy.SimSetState({ 'key': key, 'value': value })
+
+    @async_to_sync
+    async def get_state(self, key):
+        res = await self.proxy.SimGetState({ 'key': key })
+        return res
+
     async def _observation_space_info(self):
         observation_space = await self.proxy.SimObservationSpace()
         observation_space = Unserializer.unserializeMeta(observation_space)
@@ -91,15 +99,6 @@ class ClientDapr:
         action_space = await self.proxy.SimActionSpace()
         action_space = Unserializer.unserializeMeta(action_space)
         return action_space
-
-    @async_to_sync
-    async def set_state(self, key, value):
-        await self.proxy.SimSetState({ 'key': key, 'value': value })
-
-    @async_to_sync
-    async def get_state(self, key):
-        res = await self.proxy.SimGetState({ 'key': key })
-        return res
 
     def create(self, envId):
         self._create(envId)
