@@ -10,5 +10,5 @@ grpcio-tools==1.26.0
 protobuf==3.11.3
 six==1.14.0
 tox == 3.15.0
-roadwork==0.0.1
+roadwork
 gym==0.17.2
