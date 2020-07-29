@@ -12,3 +12,4 @@ six==1.14.0
 tox == 3.15.0
 roadwork
 gym==0.17.2
+gym_unity==0.18.0

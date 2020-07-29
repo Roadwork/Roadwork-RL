@@ -35,8 +35,11 @@ cd ~/roadwork-rl
 # 1. Start Server
 sudo dapr run --app-id rw-server --app-port 3000 python3 ./src/Server/main.py
 
-# 2. Start Experiment (different window)
+# 2. Start OpenAI Experiment (different window)
 sudo dapr run --app-id demo-client python3 ./src/Experiments/baselines/cartpole/train.py
+
+# 3. Start ML-Agent Experiment (different window)
+sudo dapr run --app-id demo-client python3 ./src/Experiments/baselines/cartpole-agent/train.py
 ```
 
 ### Language SDKs Available
