@@ -100,9 +100,7 @@ wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O 
 cd
 
 # Install Dapr/Dapr-Flask + Patch it for Python 3.7
-git clone https://github.com/dapr/python-sdk.git dapr-python-sdk
-cd dapr-python-sdk; sed -i 's/python_requires = >=3.8/python_requires = >=3.7/g' setup.cfg; sudo pip3 install -e .; cd ..;
-cd dapr-python-sdk/ext/flask_dapr; sed -i 's/python_requires = >=3.8/python_requires = >=3.7/g' setup.cfg; sudo pip3 install -e .; cd ../../../;
+sudo pip3 install dapr-ext-fastapi-dev
 
 # Clone Roadwork
 cd
@@ -137,7 +135,7 @@ export DISPLAY=:0
 cd src/Server
 
 # 3. Run Main Server (containing OpenAI)
-sudo dapr run --app-id demo-actor --app-port 3000 python3 ./Server/main.py
+sudo dapr run --app-id demo-actor --app-port 3000 -- uvicorn --port 3000 main:app
 ```
 
 ### Client

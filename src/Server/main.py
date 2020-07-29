@@ -1,15 +1,22 @@
-# -*- coding: utf-8 -*-
-# Copyright (c) Microsoft Corporation.
-# Licensed under the MIT License.
+"""
+server start
+uvicorn --port 3000 main:app
+"""
 
-from roadwork.server import RoadworkActorService
+from fastapi import FastAPI
+from dapr.ext.fastapi import DaprActor
 
 # Import our servers
 from OpenAI.server import ActorOpenAI
 from Unity.server import ActorUnity
 
-# Start the entire service
-service = RoadworkActorService()
-service.register(ActorOpenAI)
-service.register(ActorUnity)
-service.start()
+app = FastAPI(title=f'{ActorOpenAI.__name__}Service')
+
+# Add Dapr Actor Extension
+actor = DaprActor(app)
+
+@app.on_event("startup")
+async def startup_event():
+    # Register DemoActor
+    await actor.register_actor(ActorOpenAI)
+    await actor.register_actor(ActorUnity)

@@ -3,6 +3,8 @@ import grpc
 import sys
 import numpy as np
 import grpc
+import requests
+import time
 
 import gym.spaces.utils as gym_utils
 
@@ -10,11 +12,6 @@ import gym.spaces.utils as gym_utils
 from roadwork.json import Unserializer
 
 import uuid
-import asyncio
-
-from dapr.actor import ActorProxy, ActorId
-from roadwork.server import RoadworkActorInterface
-from asgiref.sync import async_to_sync
 
 #asgiref
 
@@ -22,81 +19,78 @@ class ClientDapr:
     metadata = { 'render.modes': [ 'human' ] }
 
     def __init__(self, simId):
-        # # We create a new asyncio event loop per instance
-        # # This way we can utilize multithreading correctly which would else be prone to collisions on the responses
-        # # note: collosion = 2 responses at the same time, making an overlap on the first by the second and crashing JSON parsing
-        # self.loop = asyncio.new_event_loop()
-        # asyncio.set_event_loop(self.loop)
-
         self.simId = simId
-
         self.actor_id = "%s-%s-%s" % ("roadwork", self.simId, str(uuid.uuid4().hex)[:8])
-        self.proxy = ActorProxy.create(self.simId, ActorId(self.actor_id), RoadworkActorInterface)
+        self.client_session = requests.Session()
 
-    @async_to_sync
-    async def _create(self, envId):
-      await self.proxy.SimCreate({ 'env_id': envId })
-      self.action_space = await self._action_space_info()
-      self.observation_space = await self._observation_space_info()
-    
-    @async_to_sync
-    async def _reset(self):
-        obs = await self.proxy.SimReset()
-        return obs
-    
-    @async_to_sync
-    async def _action_space_sample(self):
-        action = await self.proxy.SimActionSample()
-        return action
+        dapr_http_port = os.environ.get('DAPR_HTTP_PORT', 3500)
+        self._default_url = f'http://localhost:{dapr_http_port}/v1.0/actors/{self.simId}/{self.actor_id}/method'
 
-    @async_to_sync
-    async def _step(self, action):
+    def _create(self, envId):
+        self.client_session.post(f'{self._default_url}/SimCreate', json={ 'env_id': envId })
+        self.action_space = self._action_space_info()
+        self.observation_space = self._observation_space_info()
+    
+    def _reset(self):
+        r = self.client_session.post(f'{self._default_url}/SimReset', data='')
+        return r.json()
+    
+    def _action_space_sample(self):
+        r = self.client_session.post(f'{self._default_url}/SimActionSample', data='')
+        return r.json()
+
+    def _step(self, action):
         if type(action) == np.int64:
             action = int(action)
 
         if isinstance(action, np.ndarray):
             action = action.tolist()
 
-        obs, reward, done, info = await self.proxy.SimStep({ 'action': action })
-        return [ obs, reward, done, info ]
+        for _ in range(0, 3):
+            try:
+                r = self.client_session.post(f'{self._default_url}/SimStep', json={ 'action': action })
+                obs, reward, done, info = r.json()
+                return [ obs, reward, done, info ]
+            except Exception as ex:
+                print (repr(ex), flush=True)
+                time.sleep(1)
+        return []
 
-    @async_to_sync
-    async def _monitor_start(self, episode_interval):
-        await self.proxy.SimMonitorStart({ 'episode_interval': episode_interval })
+    def _monitor_start(self, episode_interval):
+        self.client_session.post(f'{self._default_url}/SimMonitorStart', json={ 'episode_interval': episode_interval })
     
-    @async_to_sync
-    async def _monitor_stop(self):
-        await self.proxy.SimMonitorStop()
+    def _monitor_stop(self):
+        self.client_session.post(f'{self._default_url}/SimMonitorStop', data='')
 
-    @async_to_sync
-    async def _sim_call_method(self, method, *method_args, **method_kwargs):
-        res = await self.proxy.SimCallMethod({ 
+    def _sim_call_method(self, method, *method_args, **method_kwargs):
+        r = self.client_session.post(f'{self._default_url}/SimCallMethod', json={ 
             'method': method,
             'args': method_args,
             'kwargs': method_kwargs
         })
+        res = r.json()
 
         if isinstance(res, list):
             res = res[0] # @todo: assumption is that list gets wrapped again? and then returns one big list, causing us to take element idx 0. But not sure
 
         return res
 
-    @async_to_sync
-    async def set_state(self, key, value):
-        await self.proxy.SimSetState({ 'key': key, 'value': value })
+    def set_state(self, key, value):
+        self.client_session.post(f'{self._default_url}/SimSetState', json={ 'key': key, 'value': value })
 
-    @async_to_sync
-    async def get_state(self, key):
-        res = await self.proxy.SimGetState({ 'key': key })
-        return res
+    def get_state(self, key):
+        r = self.client_session.post(f'{self._default_url}/SimGetState', json={ 'key': key })
+        return r.json()
 
-    async def _observation_space_info(self):
-        observation_space = await self.proxy.SimObservationSpace()
+    def _observation_space_info(self):
+        r = self.client_session.post(f'{self._default_url}/SimObservationSpace', data='')
+        observation_space = r.json()
         observation_space = Unserializer.unserializeMeta(observation_space)
         return observation_space
 
-    async def _action_space_info(self):
-        action_space = await self.proxy.SimActionSpace()
+    def _action_space_info(self):
+        r = self.client_session.post(f'{self._default_url}/SimActionSpace', data='')
+        action_space = r.json()
         action_space = Unserializer.unserializeMeta(action_space)
         return action_space
 
