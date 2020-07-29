@@ -1,4 +1,5 @@
-Flask>=1.1
+uvicorn >= 0.11.6
+fastapi >= 0.60.1
 mypy>=0.761
 mypy-extensions>=0.4.3
 flake8>=3.7.9 
@@ -12,3 +13,4 @@ six==1.14.0
 tox == 3.15.0
 roadwork
 gym==0.17.2
+gym_unity==0.18.0
