@@ -72,13 +72,13 @@ class ActorOpenAI(Actor, RoadworkActorInterface):
     async def sim_create(self, data) -> None:
         """An actor method to create a sim environment."""
         env_id = data['env_id']
-        print(data, flush=True)
+        # print(data, flush=True)
 
-        vector_idx = data['vector_index']
-        worker_idx = data['worker_index']
-        sleep = (vector_idx + 1) * worker_idx * 5
-        print(f"Sleeping for blocking call in assistive-gym env {sleep}", flush=True)
-        await asyncio.sleep(sleep)
+        # vector_idx = data['vector_index']
+        # worker_idx = data['worker_index']
+        # sleep = (vector_idx + 1) * worker_idx * 5
+        # print(f"Sleeping for blocking call in assistive-gym env {sleep}", flush=True)
+        # await asyncio.sleep(sleep)
 
         print(f'Creating sim with value {env_id}', flush=True)
         try:

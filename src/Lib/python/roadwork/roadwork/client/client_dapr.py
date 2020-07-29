@@ -26,8 +26,11 @@ class ClientDapr:
         dapr_http_port = os.environ.get('DAPR_HTTP_PORT', 3500)
         self._default_url = f'http://localhost:{dapr_http_port}/v1.0/actors/{self.simId}/{self.actor_id}/method'
 
-    def _create(self, envId):
-        self.client_session.post(f'{self._default_url}/SimCreate', json={ 'env_id': envId })
+    def _create(self, envId, **kwargs):
+        base_dict = { 'env_id': envId }
+        base_dict.update(**kwargs)
+
+        self.client_session.post(f'{self._default_url}/SimCreate', json=base_dict)
         self.action_space = self._action_space_info()
         self.observation_space = self._observation_space_info()
     
