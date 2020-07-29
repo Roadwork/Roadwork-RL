@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-rules
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  tls:
+    - hosts:
+        - hydra
+      secretName: tls-secret
+  rules:
+    - host: hydra
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: nginx-ingress-dapr
+              servicePort: 80
