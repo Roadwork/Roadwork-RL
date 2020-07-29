@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels: # Labels for the POD
+  name: p-rw-exp-cartpole # pod-roadwork-...
+  annotations:
+    dapr.io/enabled: "true" # Do we inject a sidecar to this deployment?
+    dapr.io/id: "id-rw-exp-baselines-cartpole" # Unique ID or Name for Dapr App (so we can communicate with it)
+spec:
+  containers:
+  - name: experiment # Name of our container, e.g. `kubectl logs -c c-rw-...`
+    image: roadwork.io/rw-exp-baselines-cartpole:latest
+    imagePullPolicy: Never # Production: Always or NotIfPresent
+    env:
+    - name: PYTHONUNBUFFERED
+      value: "1"
+  restartPolicy: OnFailure # OnFailure since sometimes we fail to identify the GRPC Channel

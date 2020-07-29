@@ -34,8 +34,12 @@ class ClientDapr:
         self.proxy = ActorProxy.create(self.simId, ActorId(self.actor_id), RoadworkActorInterface)
 
     @async_to_sync
-    async def _create(self, envId):
-      await self.proxy.SimCreate({ 'env_id': envId })
+    async def _create(self, envId, **kwargs):
+      base_dict = { 'env_id': envId }
+      base_dict.update(**kwargs)
+
+      await self.proxy.SimCreate(base_dict)
+      
       self.action_space = await self._action_space_info()
       self.observation_space = await self._observation_space_info()
     
@@ -100,8 +104,8 @@ class ClientDapr:
         action_space = Unserializer.unserializeMeta(action_space)
         return action_space
 
-    def create(self, envId):
-        self._create(envId)
+    def create(self, envId, **kwargs):
+        self._create(envId, **kwargs)
 
     def observation_space_info(self):
         return self.observation_space
