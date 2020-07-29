@@ -45,7 +45,7 @@ def serializeMetaDiscrete(res, space):
     res['n'] = space.n
     return res
 
-def serializeMetaMutiDiscrete(res, space):
+def serializeMetaMultiDiscrete(res, space):
     res['nvec'] = space.nvec.tolist()
     return res
 
