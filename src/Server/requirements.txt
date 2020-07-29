@@ -1,4 +1,5 @@
-Flask>=1.1
+uvicorn >= 0.11.6
+fastapi >= 0.60.1
 mypy>=0.761
 mypy-extensions>=0.4.3
 flake8>=3.7.9 

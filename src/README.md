@@ -137,7 +137,7 @@ export DISPLAY=:0
 cd src/Server
 
 # 3. Run Main Server (containing OpenAI)
-sudo dapr run --app-id demo-actor --app-port 3000 python3 ./Server/main.py
+sudo dapr run --app-id demo-actor --app-port 3000 -- uvicorn --port 3000 main:app
 ```
 
 ### Client
