@@ -24,4 +24,4 @@ echo "Display: $DISPLAY"
 echo "PWD: $(pwd)"
 
 echo "Starting Server"
-python main.py
+uvicorn --port 3000 main:app

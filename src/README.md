@@ -135,14 +135,14 @@ export DISPLAY=:0
 cd src/Server
 
 # 3. Run Main Server (containing OpenAI)
-sudo dapr run --app-id demo-actor --app-port 3000 -- uvicorn --port 3000 main:app
+sudo dapr run --app-id roadwork-service --app-port 3000 -- uvicorn --port 3000 main:app
 ```
 
 ### Client
 
 ```bash
 # 1. Run Experiment (in different window, also in src-dapr folder)
-sudo dapr run --app-id demo-client python3 ./Experiments/baselines/cartpole/train.py
+python3 ./Experiments/baselines/cartpole/train.py
 ```
 
 ## Kubernetes

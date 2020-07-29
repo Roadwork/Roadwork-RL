@@ -6,8 +6,6 @@ import gym.spaces
 import roadwork.proto.roadwork_pb2 as api_v1
 import numpy as np
 
-from flask import jsonify
-
 def serializeMeta(space):
     res = {}
     res['name'] = space.__class__.__name__

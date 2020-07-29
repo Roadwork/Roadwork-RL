@@ -19,8 +19,6 @@ import numpy as np
 import logging
 import asyncio
 
-import assistive_gym
-
 logger = logging.getLogger('RW-Server')
 
 class ActorOpenAI(Actor, RoadworkActorInterface):
