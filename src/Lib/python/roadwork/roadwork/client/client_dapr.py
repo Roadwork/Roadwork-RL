@@ -22,8 +22,6 @@ class ClientDapr:
         self.simId = simId
         self.actor_id = "%s-%s-%s" % ("roadwork", self.simId, str(uuid.uuid4().hex)[:8])
         self.client_session = requests.Session()
-        self.client_session.verify = False
-        urllib3.disable_warnings()
         self.init_roadwork_client()
 
     def init_roadwork_client(self):
@@ -31,10 +29,14 @@ class ClientDapr:
         rw_server_url = os.environ.get('ROADWORK_SERVER_URL')
         if rw_server_url:
             self.client_session.headers = {'Host': 'roadwork'}
+            self.client_session.verify = False
+            urllib3.disable_warnings()
         else:
             dapr_http_port = os.environ.get("DAPR_HTTP_PORT", "3500")
             rw_server_url = f'http://127.0.0.1:{dapr_http_port}'
         self._default_url = f'{rw_server_url}/v1.0/actors/{self.simId}/{self.actor_id}/method'
+
+        print(f'connection - {self._default_url}')
 
     def _create(self, envId, **kwargs):
         base_dict = { 'env_id': envId }
