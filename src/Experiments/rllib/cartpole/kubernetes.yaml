@@ -5,11 +5,11 @@ metadata:
   name: p-rw-exp-cartpole # pod-roadwork-...
   annotations:
     dapr.io/enabled: "true" # Do we inject a sidecar to this deployment?
-    dapr.io/id: "id-rw-exp-baselines-cartpole" # Unique ID or Name for Dapr App (so we can communicate with it)
+    dapr.io/id: "id-rw-exp-rllib-cartpole" # Unique ID or Name for Dapr App (so we can communicate with it)
 spec:
   containers:
   - name: experiment # Name of our container, e.g. `kubectl logs -c c-rw-...`
-    image: roadwork.io/rw-exp-baselines-cartpole:latest
+    image: roadwork/rw-exp-rllib-cartpole:latest
     imagePullPolicy: Never # Production: Always or NotIfPresent
     env:
     - name: PYTHONUNBUFFERED

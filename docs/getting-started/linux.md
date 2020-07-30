@@ -44,10 +44,8 @@ wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O 
 # Navigate to home dir
 cd ~
 
-# Install Dapr/Dapr-Flask
-git clone https://github.com/dapr/python-sdk.git dapr-python-sdk
-cd dapr-python-sdk; sudo pip3 install -e .; cd ~;
-cd dapr-python-sdk/ext/flask_dapr; sudo pip3 install -e .; cd ~;
+# Install Dapr python SDK
+sudo pip3 install dapr-ext-fastapi-dev
 
 # Clone Roadwork
 cd ~
@@ -77,59 +75,3 @@ We need to have daprd running on the edge version (see `sudo dapr --version`), s
 2. Unzip until you get daprd as a binary
 3. Copy daprd to /usr/local/bin and replace the old one
 4. Run `sudo dapr --version` and confirm that you see: `Runtime version: edge`
-
-## Kubernetes Installation
-
-### Installing Redis
-
-```bash
-# Install Helm
-# https://helm.sh/docs/intro/install/
-curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-chmod 700 get_helm.sh
-./get_helm.sh
-
-# Install redis into cluster
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install redis bitnami/redis
-
-echo "Redis is now running, credentials:"
-echo "Host: redis-master:6379"
-echo "Password: $(kubectl get secret --namespace default redis -o jsonpath="{.data.redis-password}" | base64 --decode)"
-
-# Apply
-kubectl apply -f Server/redis.yaml
-```
-
-### Installing Server
-
-
-```bash
-# Build Server
-./Scripts/linux/build-server.sh Server/ roadwork.io/rw-server
-
-# Remove old Server
-kubectl delete deployment rw-server
-
-# Start Server
-kubectl apply -f Server/kubernetes.yaml
-
-# Get Logs
-kubectl logs -f deployment/rw-server -c server -f
-```
-
-### Installing Client
-
-```bash
-# Build Client
-./Scripts/linux/build-client.sh Experiments/baselines/cartpole roadwork.io/rw-exp-baselines-cartpole
-
-# Remove old Client
-kubectl delete pod p-rw-exp-cartpole
-
-# Start Client
-kubectl apply -f Experiments/baselines/cartpole/kubernetes.yaml
-
-# Get Logs
-kubectl logs pod/p-rw-exp-cartpole -c experiment -f
-```
