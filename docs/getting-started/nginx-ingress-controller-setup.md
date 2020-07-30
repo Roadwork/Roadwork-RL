@@ -9,7 +9,7 @@
 
 We are going to “Daprize” the NGINX Ingress Controller so traffic flows as shown in the following picture:
 
-![/assets/dapr-nginx-ingress.png](./assets/dapr-nginx-ingress.png)
+![/../../assets/dapr-nginx-ingress.png](./../../assets/dapr-nginx-ingress.png)
 
 ```bash
 # Add helm repo of kubernetes-charts
