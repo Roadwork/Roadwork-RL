@@ -142,7 +142,7 @@ sudo dapr run --app-id roadwork-service --app-port 3000 -- uvicorn --port 3000 m
 
 ```bash
 # 1. Run Experiment (in different window, also in src-dapr folder)
-python3 ./Experiments/baselines/cartpole/train.py
+sudo dapr run --app-id roadwork-client python3 ./Experiments/rllib/cartpole/train.py
 ```
 
 ## Kubernetes
