@@ -41,7 +41,7 @@ metadata:
   labels: # Labels for the DEPLOYMENT, this way we can filter e.g. `kubectl delete -l key=value,key2=value2`
     app: rw-server # deployment-roadwork-...
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
      app: actoropenai # Which pod will the deployment apply to?

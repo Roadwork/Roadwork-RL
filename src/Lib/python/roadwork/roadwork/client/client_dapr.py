@@ -25,9 +25,10 @@ class ClientDapr:
         self.client_session.verify = False
         urllib3.disable_warnings()
         
-        self.default_headers = {'Host': 'hydra'}
+        self.default_headers = {'Host': 'roadwork'}
         self.client_session.headers = self.default_headers
-        self._default_url = f'https://20.190.28.131:443/v1.0/actors/{self.simId}/{self.actor_id}/method'
+        rw_endpoint = os.environ.get('ROADWORK_SERVER_URL', '20.190.28.131:443')
+        self._default_url = f'https://{rw_endpoint}/v1.0/actors/{self.simId}/{self.actor_id}/method'
 
     def _create(self, envId, **kwargs):
         base_dict = { 'env_id': envId }
@@ -55,6 +56,8 @@ class ClientDapr:
         for _ in range(0, 3):
             try:
                 r = self.client_session.post(f'{self._default_url}/SimStep', json={ 'action': action })
+                if len(r.json()) == 0:
+                    return []
                 obs, reward, done, info = r.json()
                 return [ obs, reward, done, info ]
             except Exception as ex:

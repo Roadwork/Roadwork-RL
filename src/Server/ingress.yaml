@@ -9,10 +9,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - hydra
+        - roadwork
       secretName: tls-secret
   rules:
-    - host: hydra
+    - host: roadwork
       http:
         paths:
           - path: /

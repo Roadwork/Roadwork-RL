@@ -4,7 +4,7 @@ import ray
 from ray.rllib.agents import ppo
 from roadwork.client import RayEnvironment as RwRayEnvironment
 
-CHECKPOINT_DIR = "/mnt/e/Projects/roadwork-rl/output-server/cartpole-checkpoint"
+CHECKPOINT_DIR = "output-server/cartpole-checkpoint"
 CHECKPOINT_FILE = "last_checkpoint.out"
 
 ray.init()
