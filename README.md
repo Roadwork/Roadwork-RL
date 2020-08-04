@@ -42,8 +42,6 @@ cd <REPO ROOT>/src/Experiments/rllib/cartpole
 python3 train.py
 ```
 
-```
-
 ### Getting Started - More information / development
 
 For more information, feel free to check out the following documentation:
