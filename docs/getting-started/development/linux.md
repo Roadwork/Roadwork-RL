@@ -75,3 +75,25 @@ We need to have daprd running on the edge version (see `sudo dapr --version`), s
 2. Unzip until you get daprd as a binary
 3. Copy daprd to /usr/local/bin and replace the old one
 4. Run `sudo dapr --version` and confirm that you see: `Runtime version: edge`
+
+### Starting the Server
+
+Once the installation is done, you can now start the Server as follows:
+
+```bash
+# 0a. Start X Server for rendering
+sudo Xvfb -screen 0 1024x768x24 &
+export DISPLAY=:0
+
+# 0b. Navigate to Roadwork-RL Server
+cd <REPO ROOT>/src/Server
+
+# 1. Start Server
+sudo dapr run --app-id rw-server --app-port 3000 -- uvicorn --port 3000 main:app
+
+# 2. Start OpenAI Experiment (different window)
+sudo dapr run --app-id demo-client python3 ./src/Experiments/baselines/cartpole/train.py
+
+# 3. Start ML-Agent Experiment (different window)
+sudo dapr run --app-id demo-client python3 ./src/Experiments/baselines/cartpole-agent/train.py
+```

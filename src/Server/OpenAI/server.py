@@ -34,7 +34,6 @@ class ActorOpenAI(Actor, RoadworkActorInterface):
 
         return getattr(self.env, method)(*args, **kwargs)
 
-
     async def sim_get_state(self, data) -> object:
         key = data['key']
         has_value, val = await self._state_manager.try_get_state(key)
@@ -69,8 +68,8 @@ class ActorOpenAI(Actor, RoadworkActorInterface):
 
     async def sim_create(self, data) -> None:
         """An actor method to create a sim environment."""
+        print(data, flush=True)
         env_id = data['env_id']
-        # print(data, flush=True)
 
         # vector_idx = data['vector_index']
         # worker_idx = data['worker_index']

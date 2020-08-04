@@ -9,6 +9,6 @@ spec:
   - name: redisHost
     value: redis-master.statestore.svc.cluster.local:6379
   - name: redisPassword
-    value: PaEoecNbM7
+    value: YOUR_PASSWORD
   - name: actorStateStore
     value: "true"

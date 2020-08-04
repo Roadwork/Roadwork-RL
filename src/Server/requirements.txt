@@ -1,19 +1,29 @@
-uvicorn >= 0.11.6
-fastapi >= 0.60.1
-Flask >= 1.1
-flask-dapr-dev
+# Environments
 mypy>=0.761
 mypy-extensions>=0.4.3
 flake8>=3.7.9 
-aiohttp>=3.6.2
 python-dateutil>=2.8.1
-protobuf == 3.11.3
-grpcio==1.26.0
-grpcio-tools==1.26.0
-protobuf==3.11.3
 six==1.14.0
-tox == 3.15.0
-roadwork
+tox==3.15.0
 gym==0.17.2
 gym_unity==0.18.0
+
+# Install to ensure Dapr compatibility (Dapr depends on this)
+grpcio==1.26.0
+protobuf==3.11.3
+
+# Dapr
+fastapi >= 0.60.1
 dapr-ext-fastapi-dev>=0.6.0a0.dev0
+
+# Roadwork Library
+roadwork
+
+# Old
+# aiohttp>=3.6.2
+# protobuf==3.11.3
+# fastapi >= 0.60.1
+# grpcio==1.26.0
+# grpcio-tools==1.26.0
+# Flask >= 1.1
+# flask-dapr-dev
