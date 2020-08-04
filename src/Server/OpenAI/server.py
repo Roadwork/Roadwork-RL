@@ -16,6 +16,10 @@ import sys
 import os
 import traceback
 import numpy as np
+import logging
+import asyncio
+
+logger = logging.getLogger('RW-Server')
 
 class ActorOpenAI(Actor, RoadworkActorInterface):
     def __init__(self, ctx, actor_id):
@@ -29,7 +33,6 @@ class ActorOpenAI(Actor, RoadworkActorInterface):
         kwargs = data['kwargs'] # Dict 
 
         return getattr(self.env, method)(*args, **kwargs)
-
 
     async def sim_get_state(self, data) -> object:
         key = data['key']
@@ -57,25 +60,34 @@ class ActorOpenAI(Actor, RoadworkActorInterface):
         return res
         
     async def sim_observation_space(self) -> object:
+        print(self.env.observation_space, flush=True)
+        print(self.env.observation_space.high, flush=True)
+        print(self.env.observation_space.low, flush=True)
         res = Serializer.serializeMeta(self.env.observation_space)
         return res
 
     async def sim_create(self, data) -> None:
         """An actor method to create a sim environment."""
+        print(data, flush=True)
         env_id = data['env_id']
-        # seed = data['seed']
+
+        # vector_idx = data['vector_index']
+        # worker_idx = data['worker_index']
+        # sleep = (vector_idx + 1) * worker_idx * 5
+        # print(f"Sleeping for blocking call in assistive-gym env {sleep}", flush=True)
+        # await asyncio.sleep(sleep)
 
         print(f'Creating sim with value {env_id}', flush=True)
         try:
             self.env = gym.make(env_id)
-
             # if seed:
             #     self.env.seed(seed)
         except gym.error.Error as e:
-            print(e)
+            print(e, flush=True)
             raise Exception("Attempted to look up malformed environment ID '{}'".format(env_id))
         except Exception as e:
-            print(e)
+            print(e, flush=True)
+            logger.exception('')
             raise Exception(e)
         except:
             print(sys.exc_info())

@@ -1,0 +1,13 @@
+numpy==1.18.3
+#stable-baselines==2.10.0
+tensorflow==2.2.0
+
+# RLLib
+ray==0.8.5
+ray[rllib]==0.8.5
+ray[tune]==0.8.5
+dm-tree==0.1.5
+lz4==3.0.2
+
+# Install bullet3 from fork for assistive gym
+# git+https://github.com/Zackory/bullet3.git

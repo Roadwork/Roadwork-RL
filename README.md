@@ -15,29 +15,41 @@ A high-level architecture of the platform can be found below. The focus points o
 
 ## Getting Started
 
-You can get started yourself in 2 different ways, for researchers we recommend "**Kubernetes**" while as for development purposes, we recommend running the "**Standalone**" installation. See the links below for the different Operating Systems to get started.
+Roadwork-RL is as easy as setting up the server environment on Kubernetes, whereafter Reinforcement Learning experiments can be ran on the cluster. To explain this, we have split the getting started guid into 2 different parts:
 
-> **Note:** We recommend Linux as the target Operating System
+* **Simulation Cluster Creation:** This has to be done once (ideally by a server admin)
+* **Running RL Experiments:** This can be executed by the Reinforcement Learning specialists with the commands they are used to.
 
-* [Windows](./docs/getting-started/windows.md) - WIP
-* [Linux](./docs/getting-started/linux.md)
+### Getting Started - Creating the Simulation Cluster
 
-Once the installation is done, you can run your first experiment (Cartpole) through the following commands:
+1. Create a Simulation cluster as [shown here](/docs/getting-started/kubernetes.md).
+2. Expose the URL as [shown here](/docs/getting-started/nginx-ingress-controller-setup.md).
+
+### Getting Started - Running an Experiment
+
+Once a Simulation cluster has been set-up, you can run an experiment. This is how you can run the Cartpole experiment provided in this repository:
 
 ```bash
-# 0a. Start X Server for rendering
-sudo Xvfb -screen 0 1024x768x24 &
-export DISPLAY=:0
+# Configure the Roadwork Simulation Cluster IP Address to run the Experiment against
+# E.g. export ROADWORK_SERVER_URL=https://20.190.28.131:443
+# E.g. export ROADWORK_SERVER_URL=https://127.0.0.1:33843
+export ROADWORK_SERVER_URL=https://<EXTERNAL-IP>
 
-# 0b. Navigate to Roadwork
-cd ~/roadwork-rl
+# Navigate to your experiment folder
+cd <REPO ROOT>/src/Experiments/rllib/cartpole
 
-# 1. Start Server
-sudo dapr run --app-id rw-server --app-port 3000 python3 ./src/Server/main.py
-
-# 2. Start Experiment (different window)
-sudo dapr run --app-id demo-client python3 ./src/Experiments/baselines/cartpole/train.py
+# Execute your experiment
+python3 train.py
 ```
+
+### Getting Started - More information / development
+
+For more information, feel free to check out the following documentation:
+
+* [Running the simulation cluster in development mode](/docs/getting-started/development/linux.md)
+* [Installing a Local Kubernetes cluster](/docs/getting-started/development/minikube.md)
+
+## References
 
 ### Language SDKs Available
 
