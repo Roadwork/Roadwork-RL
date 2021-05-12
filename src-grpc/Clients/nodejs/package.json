@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@grpc/proto-loader": "^0.5.3",
-    "grpc": "^1.24.2",
+    "grpc": "^1.24.9",
     "grpc-helper": "^0.5.1",
     "grpc-promise": "^1.4.0",
     "qs": "^6.9.1"
