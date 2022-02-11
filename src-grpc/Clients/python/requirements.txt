@@ -1,4 +1,4 @@
 grpcio==1.29.0
 grpcio-tools==1.29.0
-protobuf==3.12.2
+protobuf==3.15.0
 numpy==1.18.3
