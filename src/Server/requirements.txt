@@ -10,7 +10,7 @@ gym_unity==0.18.0
 
 # Install to ensure Dapr compatibility (Dapr depends on this)
 grpcio==1.26.0
-protobuf==3.11.3
+protobuf==3.15.0
 
 # Dapr
 fastapi >= 0.60.1
@@ -21,7 +21,7 @@ roadwork
 
 # Old
 # aiohttp>=3.6.2
-# protobuf==3.11.3
+# protobuf==3.15.0
 # fastapi >= 0.60.1
 # grpcio==1.26.0
 # grpcio-tools==1.26.0
