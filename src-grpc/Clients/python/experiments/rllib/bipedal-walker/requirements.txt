@@ -1,7 +1,7 @@
 grpcio==1.29.0
 grpcio-tools==1.29.0
 protobuf==3.12.2
-tensorflow==2.2.0
+tensorflow==2.7.2
 
 # OpenAI Gym
 gym==0.17.2
